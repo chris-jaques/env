@@ -35,7 +35,7 @@ alias ls='ls -a --color'
 # ls list
 alias lsl='ls -la'
 
-# grep recursive, case-insensitive, filename only
+# grep recursive, case-insensitive, filename only {searchString}
 alias g='grep -ril'
 
 # clear the console
@@ -58,10 +58,7 @@ replaceAll(){
 	find . -name $1 -print0 | xargs -0 sed -i "s/$2/$3/g"
 }
 
-# package managers
-alias sag='sudo apt-get'
-
-
+# nano { filename }
 alias n='nano'
 
 alias ..='cd ..'
@@ -69,13 +66,6 @@ alias .2='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
 
-
-# source all '.al', used as plugin system for env
-srcCustom() {
-	mkdir -p ~/env/tmp
-	for al in $(find ~/env -name '*.al'); do source $al; done
-	for al in $(find ~/env/tmp/ -type f -name '*' ); do source $al ; done
-}
 
 # generic map storage
 mapget(){
@@ -100,6 +90,14 @@ mapset(){
     echo "$key:$value" >> $file
   else sed -i "/^$key:/c$key:$value" $file;
   fi
+}
+
+
+# source all '.al', used as plugin system for env
+srcCustom() {
+	mkdir -p ~/env/tmp
+	for al in $(find ~/env -name '*.al'); do source $al; done
+	for al in $(find ~/env/tmp/ -type f -name '*' ); do source $al ; done
 }
 
 # Exec
