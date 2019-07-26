@@ -32,7 +32,7 @@ alias lift='cd ~/dev/lift/system'
 alias lt='cd ~/dev/lift/LIFT-Themes'
 
 # Terminal Math
-alias math='cd ~/Documents/code/terminal-math'
+alias math='cd ~/dev/terminal-math'
 
 # Image Open Tracking
 alias ot='cd ~/dev/logos/'
