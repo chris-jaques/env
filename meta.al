@@ -6,6 +6,6 @@
 
 # Alias Search { keyword }
 as(){
-    r
+    clear
     python3 ~/env/search.py $1
 }
