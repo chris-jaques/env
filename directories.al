@@ -4,6 +4,9 @@
 #
 #
 
+# Env
+alias e='cd ~/env'
+
 # LIFT API
 alias api='cd ~/dev/lift-system-api'
 
