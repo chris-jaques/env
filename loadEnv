@@ -1,6 +1,6 @@
 #!/bin/sh
 # 
-# Bash Helpers
+# Source the Env
 #
 
 # source all '.al', used as plugin system for env
