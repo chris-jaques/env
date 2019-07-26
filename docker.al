@@ -4,6 +4,7 @@
 #
 #
 
+# Install Docker
 i-docker(){
 	#[[ -z $1 ]] && version='latest' || version=$1
 	# download and install docker into '/usr/bin'
@@ -31,6 +32,7 @@ i-docker(){
 	docker-compose --version
 }
 
+# Install Docker-Compose
 i-docker-compose(){
 	tag=`curl -Ls -o /dev/null -w %{url_effective} https://github.com/docker/compose/releases/latest`
 	tag=${tag##*/}

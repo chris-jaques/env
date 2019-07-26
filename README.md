@@ -1,9 +1,14 @@
+
 ## Environment Repo
+
 This repo is a collection of aliases and functions used to normailize my workflow across linux machines. currently only using bash to limit dependencies and also not using anything distro-specific (i.e. package-manager, etc) for compatibility.  
+
 ## Organization
-The 'aliases' file is sourced by the user's .rc file. This file lists a set of generic aliases (mostly shorthands; i.e. 'e for exit') as well as a function to detect and source '.al' files within the 'env' folder. `.al` files are a way to group application specific aliases and functions together so that they can be included/excluded together, separate from other applications.
+
+The 'loadEnv' file is sourced by the user's .rc file. This file detects and sources all '.al' files within the 'env' folder. `.al` files are a way to group application specific aliases and functions together so that they can be included/excluded together, separate from other applications.
 
 ## installation
+
 Use install script:
 
 ```sh

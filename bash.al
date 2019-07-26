@@ -61,13 +61,14 @@ replaceAll(){
 # nano { filename }
 alias n='nano'
 
+# Jump to Parent Directories
 alias ..='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
 
 
-# generic map storage
+# Generic Map Storage - Retreive Value {key}
 mapget(){
   key="$1"
   [ -z "$2" ] && file=$default_config || file="$2"
@@ -77,6 +78,8 @@ mapget(){
   # parse and return value
   echo ${value/"$key:"/""}
 }
+
+# Generic Map Storage - Set Value {key} {value}
 mapset(){
   key="$1"
   value="$2"
