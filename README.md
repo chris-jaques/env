@@ -18,7 +18,7 @@ curl https://raw.githubusercontent.com/chris-jaques/env/master/install.sh | sh
 which will checkout this repo into the user's home folder and perform the following:
 
 ```sh
-echo "source ~/env/aliases" >> ~/.bashrc
+echo "source ~/env/loadEnv" >> ~/.bashrc
 ```
 
 NOTE: if the aliases aren't available on shell re-launch, check to see if your .bashrc is being sourced by your .profile.
