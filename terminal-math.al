@@ -6,6 +6,7 @@
 
 i-math(){
     sudo apt-get update && sudo apt-get install -y python3 xclip
+    mkdir -p ~/dev
     pushd ~/dev
     git clone https://github.com/chris-jaques/terminal-math.git
     cd terminal-math
