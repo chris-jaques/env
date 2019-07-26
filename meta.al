@@ -4,6 +4,12 @@
 #
 #
 
+i-meta(){
+    sudo apt-get update
+    sudo apt-get install -y python3
+    pip install --upgrade pip
+    pip install colorama
+}
 # Alias Search { keyword }
 as(){
     clear
