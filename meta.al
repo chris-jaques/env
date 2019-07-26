@@ -6,9 +6,8 @@
 
 i-meta(){
     sudo apt-get update
-    sudo apt-get install -y python3 python-pip
-    sudo pip install --upgrade pip
-    pip install colorama
+    sudo apt-get install -y python3 python3-pip
+    python3 -m pip install colorama --user
 }
 # Alias Search { keyword }
 as(){
