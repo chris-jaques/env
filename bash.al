@@ -94,15 +94,3 @@ mapset(){
   else sed -i "/^$key:/c$key:$value" $file;
   fi
 }
-
-
-# source all '.al', used as plugin system for env
-srcCustom() {
-	mkdir -p ~/env/tmp
-	for al in $(find ~/env -name '*.al'); do source $al; done
-	for al in $(find ~/env/tmp/ -type f -name '*' ); do source $al ; done
-}
-
-# Exec
-# activated on source call
-srcCustom
