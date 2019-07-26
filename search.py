@@ -63,13 +63,13 @@ def printHeader(filename, match_count):
 
 
 
-home = os.path.expanduser("~")
+env_dir = os.path.expanduser("~") + "/env"
 search_string = sys.argv[1]
 
-for root, dirs, files in os.walk(home + "/env"):
+for root, dirs, files in os.walk(env_dir):
         for file in files:
             if file.endswith(".al"):
-                matches = searchFile(file,search_string)
+                matches = searchFile(env_dir + "/" + file, search_string)
                 if len(matches) > 0:
                     printHeader(file,len(matches))
                     for match in matches:
