@@ -51,7 +51,17 @@ myip(){
 }
 
 # generate ssh keys { email }
-alias sgen='ssh-keygen -t rsa -b 4096 -C'
+alias shgen='ssh-keygen -t rsa -b 4096 -C'
+
+# List ssh keys
+alias shl="ls ~/.ssh | grep -v .pub"
+
+# Get Public ssh key { name }
+shget() {
+	[[ -z "$1" ]] && key=~/.ssh/id_rsa.pub || key=~/.ssh/$1.pub
+	cat $key | cbcopy
+	cat $key
+}
 
 # String Replace { filename } { from } { to }
 replaceAll(){
@@ -94,3 +104,6 @@ mapset(){
   else sed -i "/^$key:/c$key:$value" $file;
   fi
 }
+
+# Reset Env
+alias envr="exec bash"
