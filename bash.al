@@ -41,7 +41,7 @@ alias g='grep -ril'
 # clear the console
 alias c='clear'
 
-# reselt the console
+# reset the console
 alias r="reset"
 
 # What's my ip addr?
@@ -50,8 +50,13 @@ myip(){
 	echo ${addr}
 }
 
-# generate ssh keys { email }
-alias shgen='ssh-keygen -t rsa -b 4096 -C'
+# generate ssh keys { label } { email }
+shgen(){
+	ssh-keygen -t rsa -N "" -f ~/.ssh/$1 -C $2
+	eval "$(ssh-agent -s)"
+	ssh-add ~/.ssh/$1
+}
+#='pushd ~/.ssh; ssh-keygen -t rsa -b 4096 -C; popd'
 
 # List ssh keys
 alias shl="ls ~/.ssh | grep -v .pub"
