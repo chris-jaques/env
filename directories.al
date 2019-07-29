@@ -13,9 +13,6 @@ alias api='cd ~/dev/lift-system-api'
 # LIFT CLI
 alias cli='cd ~/dev/lift-cli/'
 
-# Dev
-alias dev='cd ~/dev/'
-
 # Data Migration Tool
 alias dm='cd ~/dev/code/data-migration/'
 
@@ -30,9 +27,6 @@ alias lift='cd ~/dev/lift/system'
 
 # LIFT Themes
 alias lt='cd ~/dev/lift/LIFT-Themes'
-
-# Terminal Math
-alias math='cd ~/dev/terminal-math'
 
 # Image Open Tracking
 alias ot='cd ~/dev/logos/'
