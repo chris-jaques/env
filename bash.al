@@ -17,9 +17,6 @@ bootstrapcmd(){
 # Is Mac?
 ismac(){ [ "$(uname)" == "Darwin" ] ;}
 
-# overrides 'open' to make it cross platform
-open(){ echo ${@:1}; ismac && command open ${@:1} || xdg-open "${@:1}" ;}
-
 # Copy to Clipboard { text }
 ismac && alias cbcopy='pbcopy' || alias cbcopy='xclip -selection c'
 

@@ -12,17 +12,21 @@ i-chrome(){
     rm google-chrome-stable_current_amd64.deb
 }
 
+
+# open web browser { website } { queryString }
+web(){ echo ${@:1}; ismac && command open $1$2 || xdg-open $1$2 ;}
+
 # Google Search {searchString}
-alias goo="open https://www.google.com/search?q="
+alias goo="web https://www.google.com/search?q="
 
 # SuperLIFT Invoice Breakdown {invoiceNumber}
-alias inv="open https://superlift.theliftsystem.com/invoices/breakdown/"
+alias inv="web https://superlift.theliftsystem.com/invoices/breakdown/"
 
 # Docker Hub Search {search}
-alias dh="open https://hub.docker.com/search?q="
+alias dh="web https://hub.docker.com/search?q="
 
 # Docker hub Lucky Search {search}
-alias dhl="open https://hub.docker.com/_/"
+alias dhl="web https://hub.docker.com/_/"
 
 # explain Shell {cmd}
-alias xsh='open https://explainshell.com/explain?cmd='
+alias xsh='web https://explainshell.com/explain?cmd='
