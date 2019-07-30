@@ -79,14 +79,10 @@ gclone(){
 	cd "$3";
 
 	if [ "$4" ]; then
-		echo "OPT 4=$4 AND 5=$5"
 		[ "$5" ] && label="${@:5}" || label="$3"
 	
 		# Add local alias for this project
 		cda . "$4" "$label";
-
-		# reload env to apply new alias
-		envr;
 	fi
 }
 

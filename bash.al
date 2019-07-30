@@ -132,4 +132,7 @@ cda(){
     echo "# $label" >> ~/env/local.al
     echo "alias $2='cd $path'" >> ~/env/local.al
   fi
+
+  # reload env to apply new alias
+  envr;
 }
