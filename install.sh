@@ -10,7 +10,9 @@ if ! [ -f ~/env/local.al ]; then
 fi
 
 # apply environment
-sh ~/env/apply.sh
+if ! grep -q "~/env/loadEnv" ~/.bashrc; then
+    echo "source ~/env/loadEnv" >> ~/.bashrc
+fi
 
 # load the env
-exec bash
+source ~/.bashrc
