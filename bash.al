@@ -17,11 +17,23 @@ bootstrapcmd(){
 # Is Mac?
 ismac(){ [ "$(uname)" == "Darwin" ] ;}
 
-# Copy to Clipboard { text }
-ismac && alias cbcopy='pbcopy' || alias cbcopy='xclip -selection c'
+# Copy to Clipboard { file }
+cbcopy(){
+  if ismac; then
+    pbcopy "$1"
+  else
+    xclip -selection c "$1"
+  fi
+}
 
 # Paste from Clipboard
-ismac && alias cbpaste='pbpaste' || alias cbpaste='xclip -selection clipboard -o'
+cbpaste(){
+  if ismac; then
+    pbpaste
+  else
+    xclip -selection clipboard -o
+  fi
+}
 
 # Initialize Desktop, navigate to LIFT dir and open Slack
 alias init="nitrogen --restore; lift; slack &"
