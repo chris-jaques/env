@@ -20,9 +20,9 @@ ismac(){
 # Copy to Clipboard { file }
 cbcopy(){
   if ismac; then
-    pbcopy "$1"
+    pbcopy $1
   else
-    xclip -selection c "$1"
+    xclip -selection c $1
   fi
 }
 
