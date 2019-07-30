@@ -12,5 +12,5 @@ i-meta(){
 }
 # Alias Search { keyword }
 as(){
-    python3 ~/env/search.py $1 | less -r
+    python3 ~/env/search.py "$1" | less -r
 }
