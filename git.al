@@ -67,3 +67,31 @@ alias gsave='gup HEAD'
 
 # git checkout master
 alias gcm='git checkout master'
+
+# clone a git repo for development { gitHost } { organization } { projectName } { cdAlias? } { ...label?=projectName }
+gclone(){
+
+	# cd into development dir
+	dev;
+
+	git clone git@$1.com:$2/$3.git;
+
+	cd "$3";
+
+	if [ "$4" ]; then
+		echo "OPT 4=$4 AND 5=$5"
+		[ "$5" ] && label="${@:5}" || label="$3"
+	
+		# Add local alias for this project
+		cda . "$4" "$label";
+
+		# reload env to apply new alias
+		envr;
+	fi
+}
+
+# Clone a GitHub repo { organization } { projectName } { cdAliax? } { ...label?=projectName }
+alias ghc='gclone github'
+
+# Clone a GitLab repo { organization } { projectName } { cdAliax? } { ...label?=projectName }
+alias glc='gclone gitlab'
