@@ -5,17 +5,17 @@
 
 default_config='.envconf'
 
-i-env(){
+# Copy install command to the clipboard
+bootstrapcmd(){
   line='curl https://raw.githubusercontent.com/chris-jaques/env/master/install.sh | sh'
   echo $line | cbcopy
   echo $line
 }
-bootstrapcmd(){
-  echo 'curl https://raw.githubusercontent.com/chris-jaques/env/master/install.sh | sh && source ~/.bashrc' | cbcopy
-}
 
 # Is Mac?
-ismac(){ [ "$(uname)" == "Darwin" ] ;}
+ismac(){ 
+  [ "$(uname)" == "Darwin" ] ;
+}
 
 # Copy to Clipboard { file }
 cbcopy(){
@@ -65,7 +65,6 @@ shgen(){
 	eval "$(ssh-agent -s)"
 	ssh-add ~/.ssh/$1
 }
-#='pushd ~/.ssh; ssh-keygen -t rsa -b 4096 -C; popd'
 
 # List ssh keys
 alias shl="ls ~/.ssh | grep -v .pub"
@@ -120,7 +119,7 @@ mapset(){
 }
 
 # Reset Env
-alias envr="exec bash"
+alias envr="source ~/.bashrc"
 
 # Add a local cd alias { path } { alias } { ...label=path }
 cda(){

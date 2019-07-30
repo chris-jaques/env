@@ -28,11 +28,11 @@ def searchFile(filename, keyword):
                     match = True
                     # Trivial Case : Alias Match
                     if(re.match(r'^alias\ ', line)):
-                        # match_lines.append(line)
                         matches.append(match_lines)
                         match_lines = []
                         match = False
                 
+                # Match function definition
                 if(re.match(r"^[a-z\_\-]+\(\)\{",line,re.IGNORECASE)):
                     in_function = True
                 elif(in_function and re.match(r'^}$',line)):
@@ -47,6 +47,7 @@ def searchFile(filename, keyword):
                         matches.append(match_lines)
                     match_lines = []
     return matches
+
 def printMatch(match_lines, keyword):
     print(Back.BLACK)
     for line in match_lines:
@@ -56,7 +57,7 @@ def printMatch(match_lines, keyword):
             print(Fore.LIGHTBLUE_EX + line.replace(keyword,Fore.RED + keyword + Fore.LIGHTBLACK_EX))
     print(Style.RESET_ALL)
         
-def printHeader(filename, match_count):
+def printFileHeader(filename, match_count):
     print(Back.WHITE)
     print(Fore.BLACK)
     print(file + Fore.CYAN  + " [" + str(match_count) + "]")
@@ -71,6 +72,6 @@ for root, dirs, files in os.walk(env_dir):
             if file.endswith(".al"):
                 matches = searchFile(env_dir + "/" + file, search_string)
                 if len(matches) > 0:
-                    printHeader(file,len(matches))
+                    printFileHeader(file,len(matches))
                     for match in matches:
                         printMatch(match,search_string)
