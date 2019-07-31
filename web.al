@@ -35,4 +35,7 @@ alias dh="web https://hub.docker.com/search?q="
 alias dhl="web https://hub.docker.com/_/"
 
 # explain Shell { cmd }
-alias xsh='web https://explainshell.com/explain?cmd='
+xsh(){
+    cmd="${@:1}"
+    web https://explainshell.com/explain?cmd= "$cmd"
+}
