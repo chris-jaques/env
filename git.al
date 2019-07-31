@@ -28,14 +28,14 @@ alias gb='git branch'
 
 # git branch search { searchString }
 gbs(){
-	count=$(git branch | grep -c $1)
+	count=$(git branch -a | grep -c $1 | sed 's/remotes\/origin\///g')
 	if [ "$count" -eq 1 ]; then
-		branch=$(gb | grep $1)
+		branch=$(gb -a | grep $1 | sed 's/remotes\/origin\///g')
 		echo "$branch" | cbcopy
 		echo -e "\e[93m$branch [copied]"
 	else
 		echo "$count matches:"
-		gb | grep $1
+		gb -a | grep $1 | sed 's/remotes\/origin\///g'
 	fi
 }
 
@@ -66,10 +66,10 @@ gdown(){
 }
 
 # git pull origin master
-alias pm='gdown'
+alias pm='gdown master'
 
 # git push origin master
-alias gum='gup'
+alias gum='gup master'
 
 # reset all un-committed changes in git
 alias gset='git reset; git checkout .; git clean -i -d'
