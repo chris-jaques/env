@@ -59,23 +59,6 @@ myip(){
 	echo ${addr}
 }
 
-# generate ssh keys { label } { email }
-shgen(){
-	ssh-keygen -t rsa -N "" -f ~/.ssh/$1 -C $2
-	eval "$(ssh-agent -s)"
-	ssh-add ~/.ssh/$1
-}
-
-# List ssh keys
-alias shl="ls ~/.ssh | grep -v .pub"
-
-# Get Public ssh key { name }
-shget() {
-	[[ -z "$1" ]] && key=~/.ssh/id_rsa.pub || key=~/.ssh/$1.pub
-	cat $key | cbcopy
-	cat $key
-}
-
 # String Replace { filename } { from } { to }
 replaceAll(){
 	find . -name $1 -print0 | xargs -0 sed -i "s/$2/$3/g"
