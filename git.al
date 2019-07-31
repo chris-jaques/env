@@ -31,7 +31,7 @@ gbs(){
 	count=$(git branch | grep -c $1)
 	if [ "$count" -eq 1 ]; then
 		branch=$(gb | grep $1)
-		echo $branch | cbcopy
+		echo "$branch" | cbcopy
 		echo -e "\e[93m$branch [copied]"
 	else
 		echo "$count matches:"
