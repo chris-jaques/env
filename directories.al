@@ -1,44 +1,28 @@
 #!/bin/sh
 #
-# CD Aliases
+# Directory-related aliases
 #
 #
 
-# Env
-alias e='cd ~/env'
 
-# LIFT API
-alias api='cd ~/dev/lift-system-api'
+# Jump to Parent Directories
+alias ..='cd ..'
+alias .2='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
 
-# LIFT CLI
-alias cli='cd ~/dev/lift-cli/'
+# Add a local cd alias { path } { alias } { ...label=path }
+cda(){
+  
+  [ "$1" == "." ] && path=$(pwd) || path="$1"
+  [ "$3" ] && label="${@:3}" || label="$path"
 
-# Data Migration Tool
-alias dm='cd ~/dev/code/data-migration/'
+  if ! grep -q "^alias $2\=" ~/env/local.al; then
+    echo "" >> ~/env/local.al
+    echo "# $label" >> ~/env/local.al
+    echo "alias $2='cd $path'" >> ~/env/local.al
+  fi
 
-# Email Tracker
-alias et='cd ~/dev/Email-Tracking'
-
-# ILS Engine
-alias ils='cd ~/dev/laravel_projects/ILS_Engine'
-
-# LIFT
-alias lift='cd ~/dev/lift/system'
-
-# LIFT Themes
-alias lt='cd ~/dev/lift/LIFT-Themes'
-
-# Image Open Tracking
-alias ot='cd ~/dev/logos/'
-
-# Test Pipeline
-alias pipe='cd ~/dev/test-pipeline'
-
-# rAPId
-alias rapid='cd ~/dev/rAPId/'
-
-# Axis
-alias race='cd ~/dev/sideProjects/axis'
-
-# LWS
-alias lws='cd ~/dev/lws'
+  # reload env to apply new alias
+  envr;
+}
