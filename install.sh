@@ -6,7 +6,7 @@ git clone https://github.com/chris-jaques/env.git
 
 # create a local alias file
 if ! [ -f ~/env/local.al ]; then
-    echo "#!/bin/sh\n#\n# Local Env\n# for directory aliases specific to this computer\n#\n#\n\n# Dev\nalias dev='cd ~/dev/'" > ~/env/local.al
+    echo "#!/bin/sh\n#\n# Local Env\n# for directory aliases specific to this computer\n#\n#" > ~/env/local.al
 fi
 
 # apply environment
@@ -16,3 +16,7 @@ fi
 
 # load the env
 source ~/.bashrc
+
+# Ensure local cd helpers exist
+cda ~/env e Env
+cda ~/dev dev "Root dir for dev projects"
