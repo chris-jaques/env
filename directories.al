@@ -26,3 +26,12 @@ cda(){
   # reload env to apply new alias
   envr;
 }
+
+# Remove a local cd alias { alias }
+cdr(){
+
+  line=$(grep -n "alias $1=" ~/env/local.al | grep -Eo "^[^:]+")
+  start=$(($line - 2))
+  
+  sed -i "$start,$line"d ~/env/local.al
+}
