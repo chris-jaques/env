@@ -28,7 +28,7 @@ alias gb='git branch'
 
 # git branch search { searchString }
 gbs(){
-	count=$(git branch -a | grep -c $1 | sed 's/remotes\/origin\///g')
+	count=$(git branch -a | grep -c $1)
 	if [ "$count" -eq 1 ]; then
 		branch=$(gb -a | grep $1 | sed 's/remotes\/origin\///g')
 		echo "$branch" | cbcopy
