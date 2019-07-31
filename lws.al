@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # LWS Specific Helpers
 #

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Get/Set data about env aliases
 #

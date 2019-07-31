@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Web Browser Aliases
 #
