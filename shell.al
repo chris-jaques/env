@@ -95,4 +95,6 @@ mapset(){
 }
 
 # Reset Env
-alias envr="source ~/.bashrc"
+envr(){
+  source "$(e;pwd)/loadEnv"
+}
