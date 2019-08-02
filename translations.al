@@ -8,8 +8,9 @@
 i-trans(){
     pushd ~/Downloads
     wget git.io/trans
+    sudo apt install gawk
     sudo chmod +x ./trans
-    mv trans /usr/bin/trans
+    sudo mv trans /usr/local/bin/trans
 }
 # Translate Chinese to English
 alias t='trans zh:en'
