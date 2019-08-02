@@ -15,27 +15,28 @@ i-chrome(){
 
 # open web browser { website } { queryString }
 web(){ 
-    echo $1${@:2} 
-    ismac && command open $1"${@:2}" || xdg-open $1"${@:2}" ;
+    url="http://"$1"${@:2}";
+    echo $url;
+    ismac && command open "$url" || xdg-open "$url" ;
 }
 
 # Google Search { ...searchString }
 goo(){
     searchString="${@:1}"
-    web https://www.google.com/search?q= "$searchString"
+    web www.google.com/search?q= "$searchString"
 }
 
 # SuperLIFT Invoice Breakdown { invoiceNumber }
-alias inv="web https://superlift.theliftsystem.com/invoices/breakdown/"
+alias inv="web superlift.theliftsystem.com/invoices/breakdown/"
 
 # Docker Hub Search { search }
-alias dh="web https://hub.docker.com/search?q="
+alias dh="web hub.docker.com/search?q="
 
 # Docker hub Lucky Search { search }
-alias dhl="web https://hub.docker.com/_/"
+alias dhl="web hub.docker.com/_/"
 
 # explain Shell { cmd }
 xsh(){
     cmd="${@:1}"
-    web https://explainshell.com/explain?cmd= "$cmd"
+    web explainshell.com/explain?cmd= "$cmd"
 }
