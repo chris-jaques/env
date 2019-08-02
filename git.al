@@ -101,7 +101,7 @@ gclone(){
 
 	git clone git@$1.com:$2/$3.git;
 
-	cd "$3";
+	cd "$(basename $3)";
 
 	if [ "$4" ]; then
 		[ "$5" ] && label="${@:5}" || label="$3"
