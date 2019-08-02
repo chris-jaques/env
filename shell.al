@@ -35,9 +35,6 @@ cbpaste(){
   fi
 }
 
-# Initialize Desktop, navigate to LIFT dir and open Slack
-alias init="nitrogen --restore; lift; slack &"
-
 # override ls to always show hidden files.
 alias ls='ls -a --color'
 
