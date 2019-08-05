@@ -15,7 +15,7 @@ if ! grep -q "~/env/loadEnv" ~/.bashrc; then
 fi
 
 # load the env
-source ~/.bashrc
+source ~/env/loadEnv
 
 # Add cd alias for dev directory
 cda ~/dev dev "Root dir for dev projects"
