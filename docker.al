@@ -13,18 +13,18 @@ i_docker(){
 	version=${tag:1}
 	wget "https://download.docker.com/linux/static/stable/x86_64/docker-${version}.tgz"
 	tar -xvzf docker-${version}.tgz
-	sudo rsync docker/* /usr/bin/
+	rsync docker/* /usr/bin/
 	# create docker group
-	sudo groupadd docker
-	sudo usermod -aG docker $USER
+	groupadd docker
+	usermod -aG docker $USER
 	rm docker-${version}.tgz
 	rm -rf docker/
 	# add systemd scripts for docker deamon
 	wget 'https://raw.githubusercontent.com/docker/docker/master/contrib/init/systemd/docker.service'
 	wget 'https://raw.githubusercontent.com/docker/docker/master/contrib/init/systemd/docker.socket'
-	sudo mv docker.service docker.socket /etc/systemd/system/
-	sudo systemctl enable docker
-	sudo systemctl start docker
+	mv docker.service docker.socket /etc/systemd/system/
+	systemctl enable docker
+	systemctl start docker
 	# install docker-compose
 	i_docker-compose
 	# verify
@@ -37,8 +37,8 @@ i_docker-compose(){
 	tag=`curl -Ls -o /dev/null -w %{url_effective} https://github.com/docker/compose/releases/latest`
 	tag=${tag##*/}
 	curl -L "https://github.com/docker/compose/releases/download/${tag}/docker-compose-`uname -s`-`uname -m`" > docker-compose
-	sudo mv docker-compose /usr/local/bin/docker-compose
-	sudo chmod +x /usr/local/bin/docker-compose
+	mv docker-compose /usr/local/bin/docker-compose
+	chmod +x /usr/local/bin/docker-compose
 }
 
 

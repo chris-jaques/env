@@ -6,7 +6,7 @@
 
 # Install git
 i_git(){
-	sudo apt-get update && sudo apt-get install git
+	apt update && apt install -y git
 }
 # Show git Commit History
 alias showgit='git log --oneline --abbrev-commit --all --graph --decorate --color'

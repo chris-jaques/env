@@ -7,7 +7,7 @@
 # Install Terminal-Math
 i_math(){
     # download dependencies
-    sudo apt-get update && sudo apt-get install -y python3 xclip
+    apt update && apt install -y python3 xclip
 
     # push current dir to directory stack
     pushd .

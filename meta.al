@@ -6,8 +6,8 @@
 
 # Install Metadata Tools
 i_meta(){
-    sudo apt-get update
-    sudo apt-get install -y python3 python3-pip less
+    apt update
+    apt install -y python3 python3-pip less
     python3 -m pip install colorama --user
 }
 
