@@ -69,12 +69,23 @@ alias dbt="db . -t"
 # docker run and cleanup
 alias dr="docker run --rm"
 
-# Run Bash on Docker-Compose Service { serviceName }
+# Spin up a container, ssh into it and mount the env { image } { command=/bin/bash }
 dbash(){
+	[ -z "$2" ] && cmd='/bin/bash' || cmd="$2"
+
+	# Copy the command to activate the env inside the container
+	# Now you can just <paste> + enter and it's activated
+	echo '. ~/env/loadEnv' | cbcopy
+
+	dr -it -v $(e;pwd):/root/env "$1" "$cmd"
+}
+
+# Run Bash on Docker-Compose Service { serviceName }
+dcbash(){
 	docker-compose exec $1 /bin/bash
 }
 
 # Run sh on Docker-Compose Service { serviceName }
-dsh(){
+dcsh(){
 	docker-compose exec $1 /bin/sh
 }
