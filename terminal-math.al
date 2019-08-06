@@ -5,7 +5,7 @@
 #
 
 # Install Terminal-Math
-i-math(){
+i_math(){
     # download dependencies
     sudo apt-get update && sudo apt-get install -y python3 xclip
 

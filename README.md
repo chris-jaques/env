@@ -54,7 +54,7 @@ If you don't want this alias any more, you can also remove it with `cdr`
 3. Editing this project
 - If you don't have vscode, then you can install it with 
 ```
-i-vscode
+i_vscode
 ```
 Then you can use the `eenv` command to edit the env.
 ```sh

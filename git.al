@@ -5,7 +5,7 @@
 #
 
 # Install git
-i-git(){
+i_git(){
 	sudo apt-get update && sudo apt-get install git
 }
 # Show git Commit History

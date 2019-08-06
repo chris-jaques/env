@@ -5,7 +5,7 @@
 #
 
 # Install Translate-Shell
-i-trans(){
+i_trans(){
     pushd ~/Downloads
     wget git.io/trans
     sudo apt install gawk

@@ -5,7 +5,7 @@
 #
 
 # Install Docker
-i-docker(){
+i_docker(){
 	#[[ -z $1 ]] && version='latest' || version=$1
 	# download and install docker into '/usr/bin'
 	tag=`curl -Ls -o /dev/null -w %{url_effective} https://github.com/docker/docker-ce/releases/latest`
@@ -26,14 +26,14 @@ i-docker(){
 	sudo systemctl enable docker
 	sudo systemctl start docker
 	# install docker-compose
-	i-docker-compose
+	i_docker-compose
 	# verify
 	docker --version
 	docker-compose --version
 }
 
 # Install Docker-Compose
-i-docker-compose(){
+i_docker-compose(){
 	tag=`curl -Ls -o /dev/null -w %{url_effective} https://github.com/docker/compose/releases/latest`
 	tag=${tag##*/}
 	curl -L "https://github.com/docker/compose/releases/download/${tag}/docker-compose-`uname -s`-`uname -m`" > docker-compose
