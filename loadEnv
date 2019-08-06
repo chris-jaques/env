@@ -7,4 +7,4 @@
 git -C ~/env pull origin master &> /dev/null;
 
 # source all '.al', used as plugin system for env
-for al in $(find ~/env -name '*.al'); do source $al; done
+for al in $(find ~/env -name '*.al'); do . $al; done
