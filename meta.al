@@ -10,7 +10,9 @@ i-meta(){
     sudo apt-get install -y python3 python3-pip less
     python3 -m pip install colorama --user
 }
+
 # Alias Search { keyword }
 as(){
-    python3 ~/env/search.py "$1" | less -r
+    [ -z "$1" ] && args="" || args="${@:1}"
+    python3 ~/env/search.py "$args" | less -r
 }

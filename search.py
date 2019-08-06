@@ -54,19 +54,24 @@ def printMatch(match_lines, keyword):
         if(re.match(r'^#',line)):
             print(Fore.GREEN + line.replace(keyword,Fore.RED + keyword + Fore.GREEN))
         else:    
-            print(Fore.LIGHTBLUE_EX + line.replace(keyword,Fore.RED + keyword + Fore.LIGHTBLACK_EX))
+            print(Fore.LIGHTBLUE_EX + line.replace(keyword,Fore.RED + keyword + Fore.LIGHTBLUE_EX))
     print(Style.RESET_ALL)
         
 def printFileHeader(filename, match_count):
     print(Back.WHITE)
     print(Fore.BLACK)
-    print(file + Fore.CYAN  + " [" + str(match_count) + "]")
+    print(filename + Fore.CYAN  + " [" + str(match_count) + "]")
+    print(Style.RESET_ALL)
 
 
 
 env_dir = os.path.expanduser("~") + "/env"
-search_string = sys.argv[1]
+if len(sys.argv[1]) > 0:
+    search_string = sys.argv[1]
+else:
+    search_string = " "
 
+print(Style.RESET_ALL)
 for root, dirs, files in os.walk(env_dir):
         for file in files:
             if file.endswith(".al"):
