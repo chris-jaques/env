@@ -34,4 +34,13 @@ cdr(){
   start=$(($line - 2))
   
   sed -i "$start,$line"d ~/env/local.al
+
+  envr;
+}
+
+# Modify a local cd alias { oldAlias } { newAlias }
+cdm(){
+  sed -i "s/alias $1=/alias $2=/g" ~/env/local.al
+
+  envr;
 }
