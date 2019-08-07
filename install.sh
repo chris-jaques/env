@@ -10,7 +10,7 @@ if ! [ command -v git >/dev/null 2>&1 && command -v curl >/dev/null 2>&1 ]; then
     elif command -v apt >/dev/null 2>&1; then
         updatecmd='apt update'
         installcmd='apt install -y'
-    elif command -v brew
+    elif command -v brew > /dev/null 2>&1; then
         updatecmd='brew update'
         installcmd='brew install'
     else
