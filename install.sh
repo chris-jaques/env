@@ -1,8 +1,35 @@
 #!/bin/sh
 
+# Test for dependencies ( `git`, `grep` )
+if ! [ command -v git >/dev/null 2>&1 && command -v curl >/dev/null 2>&1 ]; then    
+    
+    # Test for package managers
+    if command -v apk >/dev/null 2>&1; then
+        updatecmd='apk update'
+        installcmd='apk'
+    elif command -v apt >/dev/null 2>&1; then
+        updatecmd='apt update'
+        installcmd='apt install -y'
+    elif command -v brew
+        updatecmd='brew update'
+        installcmd='brew install'
+    else
+        echo 'A package manager {{ apk / apt / brew }} is required to install dependencies for env' >&2
+        exit 1;
+    fi
+
+    # sudo if needed
+    [ $(id -u) -eq 0 ] && updatecmd="sudo $updatecmd";installcmd="sudo $installcmd"
+
+    # download dependencies
+    $updatecmd; $installcmd git grep
+fi
+
 # clone environment repo
-cd ~/
-git clone https://github.com/chris-jaques/env.git
+if ! [ -d ~/env ]; then
+    cd ~/
+    git clone https://github.com/chris-jaques/env.git
+fi
 
 # create a local alias file
 if ! [ -f ~/env/local.al ]; then
@@ -12,5 +39,11 @@ fi
 
 # apply environment
 if ! grep -q "~/env/loadEnv" ~/.bashrc; then
-    echo "source ~/env/loadEnv" >> ~/.bashrc
+    echo "# Source the env \n. ~/env/loadEnv" >> ~/.bashrc
+fi
+
+# Pull latest env version from git on bash startup
+if ! grep -q "git.*~/env pull origin master" ~/.bashrc; then
+    # Pull latest version of env down from git
+    echo "# Pull latest version of env from github\ngit -C ~/env pull origin master &> /dev/null;" >> ~/.bashrc
 fi
