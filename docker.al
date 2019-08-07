@@ -33,7 +33,7 @@ i_docker(){
 }
 
 # Install Docker-Compose
-i_docker-compose(){
+i_dockercompose(){
 	tag=`curl -Ls -o /dev/null -w %{url_effective} https://github.com/docker/compose/releases/latest`
 	tag=${tag##*/}
 	curl -L "https://github.com/docker/compose/releases/download/${tag}/docker-compose-`uname -s`-`uname -m`" > docker-compose
@@ -69,15 +69,29 @@ alias dbt="db . -t"
 # docker run and cleanup
 alias dr="docker run --rm"
 
-# Spin up a container, ssh into it and mount the env { image } { command=/bin/bash }
-dbash(){
+# Spin up a container, ssh into it and mount the env { image } { command=/bin/bash } { ...extraTags? }
+dssh(){
 	[ -z "$2" ] && cmd='/bin/bash' || cmd="$2"
 
 	# Copy the command to activate the env inside the container
 	# Now you can just <paste> + enter and it's activated
 	echo '. ~/env/loadEnv' | cbcopy
 
-	dr -it -v $(e;pwd):/root/env "$1" "$cmd"
+	dr -it \
+	-v $(e;pwd):/root/env \
+	${@:3} \
+	"$1" \
+	$cmd
+}
+
+# ssh into a container and run bash { image } { ...extraTags? }
+dbash(){
+	dssh $1 /bin/bash ${@:2}
+}
+
+# ssh into a container and run sh { image } { ...extraTags? }
+dsh(){
+	dssh $1 /bin/sh ${@:2}
 }
 
 # Run Bash on Docker-Compose Service { serviceName }
