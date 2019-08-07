@@ -6,7 +6,7 @@ if ! [ command -v git >/dev/null 2>&1 && command -v curl >/dev/null 2>&1 ]; then
     # Test for package managers
     if command -v apk >/dev/null 2>&1; then
         updatecmd='apk update'
-        installcmd='apk'
+        installcmd='apk add'
     elif command -v apt >/dev/null 2>&1; then
         updatecmd='apt update'
         installcmd='apt install -y'
