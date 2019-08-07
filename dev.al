@@ -18,3 +18,9 @@ eenv(){
     [ -z "$1" ] && file="local.al" || file="$1.al"
     code ~/env "$(e;pwd)/$file"
 }
+
+# Open vscode and exit the terminal { dir=. }
+codex(){
+    [ -z "$1" ] && dir="." || dir="$1"
+    code $dir;exit
+}
