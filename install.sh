@@ -1,8 +1,9 @@
 #!/bin/sh
 
 # Test for dependencies ( `git`, `grep` )
-if ! [ command -v git >/dev/null 2>&1 && command -v curl >/dev/null 2>&1 ]; then    
-    
+if [ command -v git >/dev/null 2>&1 && command -v grep >/dev/null 2>&1 ]; then    
+     command -v git && command -v grep
+    echo 'missing dependencies'
     # Test for package managers
     if command -v apk >/dev/null 2>&1; then
         updatecmd='apk update'
