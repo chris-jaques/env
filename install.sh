@@ -1,18 +1,18 @@
 #!/bin/sh
 
 # Test for dependencies ( `git`, `grep` )
-if ! [ -x "$( command -v git)" ] || ! [ -x "$(command -v grep )" ]; then
+if ! [ "$( command -v git)" ] || ! [ "$(command -v grep )" ]; then
      
     echo 'missing dependencies'
 
     # Test for package managers
-    if command -v apk 2>/dev/null; then
+    if [ "$(command -v apk)" ]; then
         updatecmd='apk update'
         installcmd='apk add'
-    elif command -v apt 2>/dev/null; then
+    elif [ "$(command -v apt)" ]; then
         updatecmd='apt update'
         installcmd='apt install -y'
-    elif command -v brew 2>/dev/null; then
+    elif [ "$(command -v brew)" ]; then
         updatecmd='brew update'
         installcmd='brew install'
     else
@@ -21,7 +21,7 @@ if ! [ -x "$( command -v git)" ] || ! [ -x "$(command -v grep )" ]; then
     fi
 
     # sudo if needed
-    [ $(id -u) -ne 0 ] && updatecmd="sudo $updatecmd";installcmd="sudo $installcmd"
+    [ $(id -u) -ne 0 ] && updatecmd="sudo $updatecmd" && installcmd="sudo $installcmd"
 
     # download dependencies
     echo "Attempting to Install Dependencies with { $updatecmd; $installcmd git grep }"
