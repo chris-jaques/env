@@ -69,6 +69,9 @@ alias dbt="db . -t"
 # docker run and cleanup
 alias dr="docker run --rm"
 
+# docker run and cleanup - interactive
+alias dri="docker run -it --rm"
+
 # Spin up a container, ssh into it and mount the env { image } { command=/bin/bash } { ...extraTags? }
 dssh(){
 	[ -z "$2" ] && cmd='/bin/bash' || cmd="$2"
@@ -102,4 +105,9 @@ dcbash(){
 # Run sh on Docker-Compose Service { serviceName }
 dcsh(){
 	docker-compose exec $1 /bin/sh
+}
+
+# Dockerized npm. Run npm on the current directory, from within a Docker container { command }
+dnpm(){
+	dri -v $(pwd):/npm -w /npm -u $(id -u) node npm "$1"
 }
