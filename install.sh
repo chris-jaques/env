@@ -38,18 +38,32 @@ fi
 # create a local alias file
 if ! [ -f ~/env/local.al ]; then
     echo "Creating local.al"
-    echo -e "#!/bin/sh\n#\n# Local Env\n# for directory aliases specific to this computer\n#\n#\n# Env\nalias e='cd ~/env'\n\n# Root dir for dev projects\nalias dev='cd ~/dev'" > ~/env/local.al
+    echo "#!/bin/sh
+#
+# Local Env
+# for directory aliases specific to this computer
+#
+#
+# Env
+alias e='cd ~/env'
+
+# Root dir for dev projects
+alias dev='cd ~/dev'" > ~/env/local.al
+
+    # ensure ~/dev exists
     mkdir -p ~/dev
 fi
 
 # apply environment
 if ! grep -q "~/env/loadEnv" ~/.bashrc; then
     echo "adding loadEnv to .bashrc"
-    echo -e "# Source the env \n. ~/env/loadEnv" >> ~/.bashrc
+    echo "# Source the env
+. ~/env/loadEnv" >> ~/.bashrc
 fi
 
 # Pull latest env version from git on bash startup
 if ! grep -q "git.*~/env pull origin master" ~/.bashrc; then
     echo "Adding git pull to .bashrc"
-    echo -e "# Pull latest version of env from github\ngit -C ~/env pull origin master &> /dev/null;" >> ~/.bashrc
+    echo "# Pull latest version of env from github
+git -C ~/env pull origin master &> /dev/null;" >> ~/.bashrc
 fi
