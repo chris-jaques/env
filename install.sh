@@ -19,7 +19,7 @@ if ! [ command -v git >/dev/null 2>&1 && command -v curl >/dev/null 2>&1 ]; then
     fi
 
     # sudo if needed
-    [ $(id -u) -eq 0 ] && updatecmd="sudo $updatecmd";installcmd="sudo $installcmd"
+    [ $(id -u) -ne 0 ] && updatecmd="sudo $updatecmd";installcmd="sudo $installcmd"
 
     # download dependencies
     $updatecmd; $installcmd git grep
