@@ -109,5 +109,5 @@ dcsh(){
 
 # Dockerized npm. Run npm on the current directory, from within a Docker container { command }
 dnpm(){
-	dri -v $(pwd):/npm -w /npm -u $(id -u) node npm "$1"
+	dri -v $(pwd):/npm -w /npm -u $(id -u) node npm "${@:1}"
 }
