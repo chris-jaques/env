@@ -19,23 +19,34 @@ def searchFile(filename, keyword):
             match_lines = []
             in_function = False
             match = False
+            header = True
 
             for line in contents.splitlines():
-                
+                # Ignore the file headers
+                if header and re.match(r'^#',line):
+                    continue
+                elif header:
+                    header = False
+
+                if debug and match: print("MATCHING... ",line)
                 match_lines.append(line)
 
                 if keyword in line:
                     match = True
+                    if debug: print("KEYWORD MATCH: ",line)
                     # Trivial Case : Alias Match
                     if(re.match(r'^alias\ ', line)):
+                        if debug: print("Alias")
                         matches.append(match_lines)
                         match_lines = []
                         match = False
                 
                 # Match function definition
-                if(re.match(r"^[a-z\_\-]+\(\)\{",line,re.IGNORECASE)):
+                if(re.match(r"^[a-z\_\-]+\(\)\ ?\{",line,re.IGNORECASE)):
                     in_function = True
+                    if debug: print("In a Function: ")
                 elif(in_function and re.match(r'^}$',line)):
+                    if debug: print("End of Function ")
                     in_function = False
                     if match:
                         matches.append(match_lines)
@@ -66,10 +77,12 @@ def printFileHeader(filename, match_count):
 
 
 env_dir = os.path.expanduser("~") + "/env"
-if len(sys.argv[1]) > 0:
+if len(sys.argv) > 1:
     search_string = sys.argv[1]
 else:
     search_string = " "
+
+debug = (False,True)[len(sys.argv) > 2 and sys.argv[2] == "-d"]
 
 print(Style.RESET_ALL)
 for root, dirs, files in os.walk(env_dir):
