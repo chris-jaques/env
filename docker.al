@@ -70,7 +70,7 @@ alias dbt="db . -t"
 alias dr="docker run --rm"
 
 # docker run and cleanup - interactive
-alias dri="docker run -it --rm"
+alias dri="docker run --rm -it"
 
 # Spin up a container, ssh into it and mount the env { image } { command=/bin/bash } { ...extraTags? }
 dssh(){
@@ -80,7 +80,7 @@ dssh(){
 	# Now you can just <paste> + enter and it's activated
 	echo '. ~/env/loadEnv' | cbcopy
 
-	dr -it \
+	dri \
 	-v $(e;pwd):/root/env \
 	${@:3} \
 	"$1" \
@@ -109,5 +109,8 @@ dcsh(){
 
 # Dockerized npm. Run npm on the current directory, from within a Docker container { command }
 dnpm(){
-	dri -v $(pwd):/npm -w /npm -u $(id -u) node npm "${@:1}"
+	if ! [ -f ~/.npmrc ]; then
+		touch ~/.npmrc
+	fi
+	dri -v $(pwd):/npm -w /npm -u $(id -u) -v ~/.npmrc:/home/node/.npmrc node npm "${@:1}"
 }
