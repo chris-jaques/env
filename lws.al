@@ -4,11 +4,16 @@
 #
 #
 
-# Lift CLI
-alias l='ruby ~/dev/lift-cli/bin/lift'
+# Install the LIFT CLI
+i_lift_cli(){
+    ghc llwebsol LIFT-CLI cli LIFT CLI
+}
 
-# Find a LIFT Client {clientName}
-alias client='ruby ~/dev/lift-cli/bin/lift find:client'
+# Lift CLI
+alias lcli='$(cli;pwd)/run.sh'
+
+# Find a LIFT Client { clientName || clientID }
+alias client='lcli find:client'
 
 # Deploy Master LIFT Branch to Staging
 alias deploymaster='pushd .;lift;mina deploy client=lift type=lift;popd'
