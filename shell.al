@@ -95,3 +95,9 @@ mapset(){
 envr(){
   source "$(e;pwd)/loadEnv"
 }
+
+# Run Bash installer function with sudo
+sudo_i(){
+	sudo bash -c "$(declare -f i_$1);i_$1"
+}
+
