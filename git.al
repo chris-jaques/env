@@ -15,10 +15,10 @@ alias showgit='git log --oneline --abbrev-commit --all --graph --decorate --colo
 alias gs='git status'
 
 # clear and git status
-alias cgs='c;gs'
+alias cgs='c gs'
 
 # reset and git status
-alias gsr='r;gs'
+alias gsr='r gs'
 
 # git diff
 alias gd='git diff'

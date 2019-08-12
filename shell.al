@@ -45,10 +45,10 @@ alias lsl='ls -la'
 alias g='grep -ril'
 
 # clear the console
-alias c='clear'
+alias c='clear;'
 
 # reset the console
-alias r="reset"
+alias r="reset;"
 
 # What's my ip addr?
 myip(){
