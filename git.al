@@ -95,6 +95,9 @@ alias gcm='gc master'
 # git checkout the branch that is in the clipboard
 alias gccb='gc $(cbpaste)'
 
+# create a new branch { branchName }
+alias gcb='git checkout -b'
+
 # clone a git repo for development { gitHost } { organization } { projectName } { cdAlias? } { ...label?=projectName }
 gclone(){
 
