@@ -20,7 +20,7 @@ eenv(){
 }
 
 # Open vscode and exit the terminal { dir=. }
-codex(){
+xc(){
     [ -z "$1" ] && dir="." || dir="$1"
-    code $dir;exit
+    x code $dir
 }
