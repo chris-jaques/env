@@ -5,6 +5,12 @@
 
 default_config='.envconf'
 
+# Install Powerline Shell
+i_powerline(){
+  apt update && apt install -y python-pip
+  pip install powerline-shell
+}
+
 # Copy install command to the clipboard
 bootstrapcmd(){
   line='curl https://raw.githubusercontent.com/chris-jaques/env/master/install.sh | sh'
@@ -105,4 +111,3 @@ envr(){
 sudo_i(){
 	sudo bash -c "$(declare -f i_$1);i_$1"
 }
-
