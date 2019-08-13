@@ -8,6 +8,7 @@
 i_git(){
 	apt update && apt install -y git
 }
+
 # Show git Commit History
 alias showgit='git log --oneline --abbrev-commit --all --graph --decorate --color'
 
@@ -117,3 +118,13 @@ alias ghc='gclone github'
 
 # Clone a GitLab repo { organization } { projectName } { cdAliax? } { ...label?=projectName }
 alias glc='gclone gitlab'
+
+# git commit { ...message? }
+gcom(){
+	if [ -z $1 ]; then
+		git commit
+	else
+		message="${@:1}"
+		git commit -m "$message"
+	fi
+}
