@@ -5,11 +5,16 @@
 #
 
 
-# Jump to Parent Directories
-alias ..='cd ..'
-alias .2='cd ../..'
-alias .3='cd ../../..'
-alias .4='cd ../../../..'
+# Jump to Parent Directory { levels=1 }
+..(){
+  [ -z "$1" ] && levels=1 || levels=$(("$1"))
+  i=0
+  while [ $i -lt $levels ]
+  do
+    cd ..
+    i=$(($i + 1))
+  done
+}
 
 # Add a local cd alias { path } { alias } { ...label=path }
 cda(){
