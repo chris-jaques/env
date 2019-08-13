@@ -111,3 +111,6 @@ envr(){
 sudo_i(){
 	sudo bash -c "$(declare -f i_$1);i_$1"
 }
+
+# Repeat the last command and pipe the results to Less
+alias rl="fc -s | less"
