@@ -7,8 +7,8 @@
 # Install Translate-Shell
 i_trans(){
     pushd ~/Downloads
+    apt update && apt install wget gawk
     wget git.io/trans
-    apt install gawk
     chmod +x ./trans
     mv trans /usr/local/bin/trans
 }
