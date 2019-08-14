@@ -58,7 +58,7 @@ alias r="reset;"
 
 # Exit the terminal after executing a command { command }
 x(){
-  "${@:1}";exit
+  "${@:1}";exit;exit
 }
 
 # What's my ip addr?
