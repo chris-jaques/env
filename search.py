@@ -14,7 +14,7 @@ def searchFile(filename, keyword):
     matches = []
     with open(filename, 'r') as file:
         contents = file.read()
-        if(keyword in contents):
+        if keyword.lower() in contents.lower():
 
             match_lines = []
             in_function = False
@@ -31,7 +31,7 @@ def searchFile(filename, keyword):
                 if debug and match: print("MATCHING... ",line)
                 match_lines.append(line)
 
-                if keyword in line:
+                if match or keyword.lower() in line.lower():
                     match = True
                     if debug: print("KEYWORD MATCH: ",line)
                     # Trivial Case : Alias Match
@@ -61,9 +61,14 @@ def searchFile(filename, keyword):
 
 def printMatch(match_lines, keyword):
     print(Back.BLACK)
+    match = ""
     for line in match_lines:
+        m = re.search(r"" + keyword,line,re.IGNORECASE)
+        if m:
+            match = m[0]
+
         if(re.match(r'^#',line)):
-            print(Fore.GREEN + line.replace(keyword,Fore.RED + keyword + Fore.GREEN))
+            print(Fore.GREEN + re.sub(keyword,Fore.RED + match + Fore.GREEN,line,flags=re.I))
         else:    
             print(Fore.LIGHTBLUE_EX + line.replace(keyword,Fore.RED + keyword + Fore.LIGHTBLUE_EX))
     print(Style.RESET_ALL)
@@ -73,7 +78,6 @@ def printFileHeader(filename, match_count):
     print(Fore.BLACK)
     print(filename + Fore.CYAN  + " [" + str(match_count) + "]")
     print(Style.RESET_ALL)
-
 
 
 env_dir = os.path.expanduser("~") + "/env"
