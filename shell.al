@@ -113,4 +113,4 @@ sudo_i(){
 }
 
 # Repeat the last command and pipe the results to Less
-alias rl="fc -s | less"
+alias rl="fc -s | less -r"
