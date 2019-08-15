@@ -103,16 +103,17 @@ def printMatch(match_lines, keyword):
     print(bg('b'))
     match = ""
     for line in match_lines:
+        
         m = re.search(r"" + re.escape(keyword),line,re.IGNORECASE)
         if m:
             match = m.group(0)
             if debug: print(" MATCH = ",match)
 
+        # Output a comment line
         if(re.match(r'^#',line)):
-            if debug:print("COMMENT LINE: ",line, 'reaplace ',keyword, ' with ',match)
             print(fg('g') + re.sub(re.escape(keyword),fg('r') + match + fg('g'),line,flags=re.I))
         else:
-            print(fg('bl') + line.replace(keyword,fg('r') + keyword + fg('bl')))
+            print(fg('bl') + re.sub(re.escape(keyword),fg('r') + match + fg('bl'),line,flags=re.I))
     reset()
 
 def printFileHeader(filename, match_count):
