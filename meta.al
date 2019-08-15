@@ -7,8 +7,7 @@
 # Install Metadata Tools
 i_meta(){
     apt update
-    apt install -y python3 python3-pip less
-    python3 -m pip install colorama --user
+    apt install -y python3 less
 }
 
 # Alias Search { keyword }

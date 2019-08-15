@@ -4,7 +4,47 @@
 import os
 import sys
 import re
-from colorama import Fore, Back, Style
+
+def fg(color):
+    """
+    Forground Colors
+    """
+    switch = {
+        # Green
+        "g": "\x1b[32m",
+        
+        # Red
+        'r': "\x1b[31m",
+
+        # Black
+        'b': "\x1b[30m",
+        
+        # White
+        'w': "\x1b[37m",
+
+        # Blue
+        'bl': "\x1b[94m",
+
+        # Cyan
+        'c': "\x1b[36m"
+    }
+    return switch.get(color)
+
+def bg(color):
+    """
+    Background Colors
+    """
+    switch = {
+        # White
+        "w": "\x1b[47m",
+
+        # Black
+        "b": "\x1b[40m"
+    }
+    return switch.get(color)
+
+def reset():
+    print("\x1b[0m")
 
 def searchFile(filename, keyword):
     """
@@ -60,7 +100,7 @@ def searchFile(filename, keyword):
     return matches
 
 def printMatch(match_lines, keyword):
-    print(Back.BLACK)
+    print(bg('b'))
     match = ""
     for line in match_lines:
         m = re.search(r"" + re.escape(keyword),line,re.IGNORECASE)
@@ -70,16 +110,16 @@ def printMatch(match_lines, keyword):
 
         if(re.match(r'^#',line)):
             if debug:print("COMMENT LINE: ",line, 'reaplace ',keyword, ' with ',match)
-            print(Fore.GREEN + re.sub(re.escape(keyword),Fore.RED + match + Fore.GREEN,line,flags=re.I))
+            print(fg('g') + re.sub(re.escape(keyword),fg('r') + match + fg('g'),line,flags=re.I))
         else:
-            print(Fore.LIGHTBLUE_EX + line.replace(keyword,Fore.RED + keyword + Fore.LIGHTBLUE_EX))
-    print(Style.RESET_ALL)
+            print(fg('bl') + line.replace(keyword,fg('r') + keyword + fg('bl')))
+    reset()
 
 def printFileHeader(filename, match_count):
-    print(Back.WHITE)
-    print(Fore.BLACK)
-    print(filename + Fore.CYAN  + " [" + str(match_count) + "]")
-    print(Style.RESET_ALL)
+    print(bg('w'))
+    print(fg('b'))
+    print(filename + fg('c')  + " [" + str(match_count) + "]")
+    reset()
 
 
 env_dir = os.path.expanduser("~") + "/env"
@@ -90,7 +130,7 @@ else:
 
 debug = (False,True)[len(sys.argv) > 2 and sys.argv[2] == "-d"]
 
-print(Style.RESET_ALL)
+reset()
 for root, dirs, files in os.walk(env_dir):
         for file in files:
             if file.endswith(".al"):
