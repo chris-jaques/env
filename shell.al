@@ -4,8 +4,8 @@
 #
 
 # Install Powerline Shell
-i_powerline(){
-  apt update && apt install -y python-pip
+i_shell_env(){
+  apt update && apt install -y python-pip thefuck
   pip install powerline-shell
 }
 

@@ -14,3 +14,8 @@ if [ "$(command -v powerline-shell)" ]; then
         PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
     fi
 fi
+
+# Load theFuck ( if installed )
+if [ "$(command -v thefuck)" ]; then
+    eval $(thefuck --alias)
+fi
