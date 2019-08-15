@@ -3,8 +3,6 @@
 # Bash Helpers
 #
 
-default_config='.envconf'
-
 # Install Powerline Shell
 i_powerline(){
   apt update && apt install -y python-pip
@@ -78,7 +76,7 @@ alias n='nano'
 # Generic Map Storage - Retreive Value {key}
 mapget(){
   key="$1"
-  [ -z "$2" ] && file=$default_config || file="$2"
+  [ -z "$2" ] && file=".envmap" || file="$2"
   file="$HOME/$file"
   # find in map file
   value=$(grep "^$key:" $file)
@@ -90,7 +88,7 @@ mapget(){
 mapset(){
   key="$1"
   value="$2"
-  [ -z "$3" ] && file=$default_config || file="$2"
+  [ -z "$3" ] && file=".envmap" || file="$2"
   file="$HOME/$file"
   [ ! -f "$file" ] && touch "$file"
   # lookup existing value
