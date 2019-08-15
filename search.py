@@ -9,7 +9,7 @@ from colorama import Fore, Back, Style
 def searchFile(filename, keyword):
     """
     Search the file for the keyword
-    if found, return the full alias/function definition(s) 
+    if found, return the full alias/function definition(s)
     """
     matches = []
     with open(filename, 'r') as file:
@@ -40,7 +40,7 @@ def searchFile(filename, keyword):
                         matches.append(match_lines)
                         match_lines = []
                         match = False
-                
+
                 # Match function definition
                 if(re.match(r"^[a-z\_\-]+\(\)\ ?\{",line,re.IGNORECASE)):
                     in_function = True
@@ -52,7 +52,7 @@ def searchFile(filename, keyword):
                         matches.append(match_lines)
                     match_lines = []
                     match = False
-                
+
                 if not in_function and re.match('^$',line):
                     if match:
                         matches.append(match_lines)
@@ -63,16 +63,18 @@ def printMatch(match_lines, keyword):
     print(Back.BLACK)
     match = ""
     for line in match_lines:
-        m = re.search(r"" + keyword,line,re.IGNORECASE)
+        m = re.search(r"" + re.escape(keyword),line,re.IGNORECASE)
         if m:
-            match = m[0]
+            match = m.group(0)
+            if debug: print(" MATCH = ",match)
 
         if(re.match(r'^#',line)):
-            print(Fore.GREEN + re.sub(keyword,Fore.RED + match + Fore.GREEN,line,flags=re.I))
-        else:    
+            if debug:print("COMMENT LINE: ",line, 'reaplace ',keyword, ' with ',match)
+            print(Fore.GREEN + re.sub(re.escape(keyword),Fore.RED + match + Fore.GREEN,line,flags=re.I))
+        else:
             print(Fore.LIGHTBLUE_EX + line.replace(keyword,Fore.RED + keyword + Fore.LIGHTBLUE_EX))
     print(Style.RESET_ALL)
-        
+
 def printFileHeader(filename, match_count):
     print(Back.WHITE)
     print(Fore.BLACK)
