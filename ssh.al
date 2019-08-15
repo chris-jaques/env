@@ -19,7 +19,7 @@ shget() {
 	[[ -z "$1" ]] && key=~/.ssh/id_rsa.pub || key=~/.ssh/$1.pub
     if [ -f "$key" ]; then
 	    cat $key | cbcopy
-	    echo -e "\e[93m[ $key ]\n\e[0m$(cbpaste)\e[93m\n[copied]"
+	    echo -e "\x1b[93m[ $key ]\n\x1b[0m$(cbpaste)\x1b[93m\n[copied]"
     else
         echo "No public key Found for $1."
     fi
