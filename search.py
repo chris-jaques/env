@@ -107,7 +107,6 @@ def printMatch(match_lines, keyword):
         m = re.search(r"" + re.escape(keyword),line,re.IGNORECASE)
         if m:
             match = m.group(0)
-            if debug: print(" MATCH = ",match)
 
         # Output a comment line
         if(re.match(r'^#',line)):
