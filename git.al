@@ -131,3 +131,6 @@ gcom(){
 		git commit -m "$message"
 	fi
 }
+
+# git add all modified files and commit
+alias gac='gad;gcom'
