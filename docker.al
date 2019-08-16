@@ -72,6 +72,9 @@ alias dr="docker run --rm"
 # docker run and cleanup - interactive
 alias dri="docker run --rm -it"
 
+# Docker Search
+alias ds="docker search"
+
 # Spin up a container, ssh into it and mount the env { image } { command=/bin/bash } { ...extraTags? }
 dssh(){
 	[ -z "$2" ] && cmd='/bin/bash' || cmd="$2"
