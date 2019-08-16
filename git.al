@@ -132,5 +132,15 @@ gcom(){
 	fi
 }
 
-# git add all modified files and commit
+# git add all modified files and commit { ...message? }
 alias gac='gad;gcom'
+
+# Git Ignore: Preview a .gitignore from gitignore.io { programmingLanguage }
+gi(){
+	curl -sL gitignore.io/api/"$1"
+}
+
+# Git Ignore Save: Grab a .gitignore from gitignore.io and save it to the current project { programmingLanguage }
+gis(){
+	gi > .gitignore
+}
