@@ -7,7 +7,7 @@
 
 # Jump to Parent Directory { levels=1 }
 ..(){
-  [ -z "$1" ] && levels=1 || levels=$(("$1"))
+  [ -z "$1" ] && levels=1 || levels=$(($1))
   i=0
   while [ $i -lt $levels ]
   do
