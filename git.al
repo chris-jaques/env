@@ -29,14 +29,14 @@ alias gb='git branch'
 
 # git branch search { searchString }
 gbs(){
-	count=$(git branch -a | grep -c $1)
+	count=$(gb -a | grep $1 | sed 's/remotes\/origin\///g' | uniq | grep -c $1)
 	if [ "$count" -eq 1 ]; then
-		branch=$(gb -a | grep $1 | sed 's/remotes\/origin\///g')
+		branch=$(gb -a | grep $1 | sed 's/remotes\/origin\///g' | uniq )
 		echo "$branch" | cbcopy
 		echo -e "\x1b[93m$branch [copied]"
 	else
 		echo "$count matches:"
-		gb -a | grep $1 | sed 's/remotes\/origin\///g'
+		gb -a | grep $1 | sed 's/remotes\/origin\///g' | uniq
 	fi
 }
 
@@ -46,20 +46,20 @@ alias ga='git add'
 # git add dot
 alias gad='ga .'
 
-# git push { remote?=origin } { branch=master }
+# git push { remote?=origin } { branch=HEAD }
 gup(){
 	if [ -z $2 ]; then
-		[ -z $1 ] && branch='master' || branch="$1"
+		[ -z $1 ] && branch='HEAD' || branch="$1"
 		git push origin "$branch"
 	else
 		git push $1 $2
 	fi
 }
 
-# git pull { remote?=origin } { branch=master }
+# git pull { remote?=origin } { branch=HEAD }
 gdown(){
 	if [ -z $2 ]; then
-		[ -z $1 ] && branch='master' || branch="$1"
+		[ -z $1 ] && branch='HEAD' || branch="$1"
 		git pull origin "$branch"
 	else
 		git pull $1 $2
@@ -67,7 +67,7 @@ gdown(){
 }
 
 # git pull origin master
-alias pm='gdown master'
+alias gdm='gdown master'
 
 # git push origin master
 alias gum='gup master'
@@ -77,9 +77,6 @@ alias gset='git reset; git checkout .; git clean -i -d'
 
 # undo last git commit
 alias gundo='git reset --soft HEAD~1'
-
-# push local git changes to same branch on the origin
-alias gsave='gup HEAD'
 
 # git checkout { branch }
 gc(){
