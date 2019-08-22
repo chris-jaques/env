@@ -119,6 +119,36 @@ alias ghc='gclone github'
 # Clone a GitLab repo { organization } { projectName } { cdAliax? } { ...label?=projectName }
 alias glc='gclone gitlab'
 
+# Create a Git Repo { gitHost } { organization } { projectName } { cdAlias? } { ...label?=projectName }
+gcreate(){
+
+	#cd into development dir
+	dev;
+
+	mkdir "$3";cd "$3";
+
+	# Initialize git with an empty README
+	# ( for something to commit )
+	git init;
+	echo "#New Project" > README.md;
+
+	# Add and Commit
+	gac initial commit;
+
+	# Add the remove
+	git remote add orign git@$1.com:$2/$3.git;
+
+	# push origin master
+	gup;
+}
+
+
+# Create a GitHub repo
+alias ghcreate='gcreate github'
+
+# Create a GitLab repo
+alias glcreate='gcreate gitlab'
+
 # git commit { ...message? }
 gcom(){
 	if [ -z $1 ]; then
