@@ -63,7 +63,7 @@ alias dcd="docker-compose down"
 # docker build
 alias db="docker build"
 
-# docker build tag
+# docker build tag { tagName }
 alias dbt="db . -t"
 
 # docker run and cleanup
