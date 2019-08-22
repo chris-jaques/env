@@ -16,7 +16,7 @@ alias lcli='$(cli;pwd)/run.sh'
 alias client='lcli find:client'
 
 # Deploy Master LIFT Branch to Staging
-alias deploymaster='pushd .;lift;mina deploy client=lift type=lift;popd'
+alias deploymaster='lcli deploy lift'
 
 # SSH Into Web1 Server
 alias sshweb='ssh chris@web1.landlordwebsolutions.com'
