@@ -40,3 +40,8 @@ xsh(){
     cmd="${@:1}"
     web explainshell.com/explain?cmd= "$cmd"
 }
+
+# explain Shell for the previous command
+xprev(){
+    xsh $(fc -ln | tail -2 | head -1)
+}
