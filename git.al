@@ -95,7 +95,7 @@ alias gcm='gc master'
 alias gccb='gc $(cbpaste)'
 
 # create a new branch { branchName }
-alias gcb='gc -b'
+alias gcb='git checkout -b'
 
 # clone a git repo for development { gitHost } { organization } { projectName } { cdAlias? } { ...label?=projectName }
 gclone(){
