@@ -47,7 +47,7 @@ alias ga='git add'
 # git add dot
 alias gad='ga .'
 
-# git push { remote?=origin } { branch=HEAD }
+# git push { remote=origin } { branch=HEAD }
 gup(){
 	if [ -z $2 ]; then
 		[ -z $1 ] && branch='HEAD' || branch="$1"
@@ -57,7 +57,7 @@ gup(){
 	fi
 }
 
-# git pull { remote?=origin } { branch=HEAD }
+# git pull { remote=origin } { branch=HEAD }
 gdown(){
 	if [ -z $2 ]; then
 		[ -z $1 ] && branch='HEAD' || branch="$1"
@@ -97,7 +97,7 @@ alias gccb='gc $(cbpaste)'
 # create a new branch { branchName }
 alias gcb='git checkout -b'
 
-# clone a git repo for development { gitHost } { organization } { projectName } { cdAlias? } { ...label?=projectName }
+# clone a git repo for development { gitHost } { organization } { projectName } { cdAlias? } { ...label=projectName }
 gclone(){
 
 	gitHost=${1:?Missing parameter: gitHost}
@@ -120,13 +120,13 @@ gclone(){
 	fi
 }
 
-# Clone a GitHub repo { organization } { projectName } { cdAliax? } { ...label?=projectName }
+# Clone a GitHub repo { organization } { projectName } { cdAliax? } { ...label=projectName }
 alias ghc='gclone github'
 
-# Clone a GitLab repo { organization } { projectName } { cdAliax? } { ...label?=projectName }
+# Clone a GitLab repo { organization } { projectName } { cdAliax? } { ...label=projectName }
 alias glc='gclone gitlab'
 
-# Create a Git Repo { gitHost } { organization } { projectName } { cdAlias? } { ...label?=projectName }
+# Create a Git Repo { gitHost } { organization } { projectName } { cdAlias? } { ...label=projectName }
 gcreate(){
 
 	gitHost=${1:?Missing parameter: gitHost}
@@ -163,10 +163,10 @@ gcreate(){
 }
 
 
-# Create a GitHub repo { organization } { projectName } { cdAlias? } { ...label?=projectName }
+# Create a GitHub repo { organization } { projectName } { cdAlias? } { ...label=projectName }
 alias ghcreate='gcreate github'
 
-# Create a GitLab repo { organization } { projectName } { cdAlias? } { ...label?=projectName }
+# Create a GitLab repo { organization } { projectName } { cdAlias? } { ...label=projectName }
 alias glcreate='gcreate gitlab'
 
 # git commit { ...message? }
