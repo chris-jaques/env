@@ -1,5 +1,5 @@
 
-## Environment Repo
+# Environment Repo
 
 This repo is a collection of aliases and functions used to normailize my workflow across linux machines. 
 
@@ -66,3 +66,46 @@ eenv;
 # Open the env project to a particular file for editing (opens git.al)
 eenv git
 ```
+
+# Conventions
+
+## 1.
+Any arguments that are accpected by a function/alias are defined in the comment above its definition
+
+example:
+```sh
+# Say Hello { name }
+hi(){
+    echo "Hello $1"
+}
+```
+This tells you that the first argument, "name", is required. 
+
+### Types of parameter definitions: 
+- Required 
+    - ex:  `{ required }`
+    - required parameter
+    - not providing this parameter will usually halt the function and output an error
+
+- Optional Paramter
+    - ex: `{ notRequired? }`
+
+- Parameter with Default
+    - ex: `{ someParameter=theDeafultValue }`
+    - If the parameter is **not** provided, the default value will be used
+
+- Parameter Array
+    - ex: `{ ...things }`
+    - 1 to any number of parameters 
+    - practicatl example:
+    ```sh
+        # Echo { ...outputText }
+        alias e="echo"
+    ```
+    - usage:
+     ```sh
+        e here is some text
+
+        #output
+        here is some text
+     ``` 
