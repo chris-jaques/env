@@ -21,7 +21,7 @@ ismac(){
   [ "$(uname)" == "Darwin" ] ;
 }
 
-# Copy to Clipboard { file }
+# Copy to Clipboard { file? }
 cbcopy(){
   if ismac; then
     pbcopy $1
@@ -45,7 +45,7 @@ alias ls='ls -a --color'
 # ls list
 alias lsl='ls -la'
 
-# grep recursive, case-insensitive, filename only {searchString}
+# grep recursive, case-insensitive, filename only { searchString }
 alias g='grep -ril'
 
 # clear the console
@@ -54,7 +54,7 @@ alias c='clear;'
 # reset the console
 alias r="reset;"
 
-# Exit the terminal after executing a command { command }
+# Exit the terminal after executing a command { command? }
 x(){
   "${@:1}";exit;exit
 }
@@ -67,15 +67,19 @@ myip(){
 
 # String Replace { filename } { from } { to }
 replaceAll(){
-	find . -name $1 -print0 | xargs -0 sed -i "s/$2/$3/g"
+  filename=${1:?Missing parameter: filename}
+  from=${2:?Missing parameter: from}
+  to=${3:?Missing parameter: to}
+	find . -name $filename -print0 | xargs -0 sed -i "s/$from/$to/g"
 }
 
-# nano { filename }
+# nano { filename? }
 alias n='nano'
 
-# Generic Map Storage - Retreive Value {key}
+# Generic Map Storage - Retreive Value { key } { configFile=.envmap }
 mapget(){
-  key="$1"
+  key="${1:?Missing parameter: key}"
+
   [ -z "$2" ] && file=".envmap" || file="$2"
   file="$HOME/$file"
   # find in map file
@@ -84,10 +88,11 @@ mapget(){
   echo ${value/"$key:"/""}
 }
 
-# Generic Map Storage - Set Value {key} {value}
+# Generic Map Storage - Set Value { key } { value } { configFile=.envmap }
 mapset(){
-  key="$1"
-  value="$2"
+  key="${1:?Missing parameter: key}"
+  value="${2:?Missing parameter: value}"
+
   [ -z "$3" ] && file=".envmap" || file="$2"
   file="$HOME/$file"
   [ ! -f "$file" ] && touch "$file"
@@ -105,9 +110,10 @@ envr(){
   source "$(e;pwd)/loadEnv"
 }
 
-# Run Bash installer function with sudo
+# Run Bash installer function with sudo { installerName }
 sudo_i(){
-	sudo bash -c "$(declare -f i_$1);i_$1"
+  func=${1:?Missing parameter: installerName}
+	sudo bash -c "$(declare -f i_$func);i_$func"
 }
 
 # Repeat the last command and pipe the results to Less

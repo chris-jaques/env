@@ -34,8 +34,8 @@ cda(){
 
 # Remove a local cd alias { alias }
 cdr(){
-
-  line=$(grep -n "alias $1=" ~/env/local.al | grep -Eo "^[^:]+")
+  alias=${1:?Missing parameter: alias}
+  line=$(grep -n "alias $alias=" ~/env/local.al | grep -Eo "^[^:]+")
   start=$(($line - 2))
   
   sed -i "$start,$line"d ~/env/local.al
@@ -45,7 +45,11 @@ cdr(){
 
 # Modify a local cd alias { oldAlias } { newAlias }
 cdm(){
-  sed -i "s/alias $1=/alias $2=/g" ~/env/local.al
+  
+  oldAlias=${1:?Missing parameter: oldAlias}
+  newAlias=${2:?Missing parameter: newAlias}
+
+  sed -i "s/alias $oldAlias=/alias $newAlias=/g" ~/env/local.al
 
   envr;
 }

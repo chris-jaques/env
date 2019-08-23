@@ -9,6 +9,9 @@ i_lift_cli(){
     ghc llwebsol LIFT-CLI cli LIFT CLI
 }
 
+# Build the LIFT CLI
+alias lclibuild='$(cli;pwd)/build.sh'
+
 # Lift CLI
 alias lcli='$(cli;pwd)/run.sh'
 

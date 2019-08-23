@@ -29,14 +29,15 @@ alias gb='git branch'
 
 # git branch search { searchString }
 gbs(){
-	count=$(gb -a | grep $1 | sed 's/remotes\/origin\///g' | uniq | grep -c $1)
+	search=${1:?Missing parameter: searchString}
+	count=$(gb -a | grep $search | sed 's/remotes\/origin\///g' | uniq | grep -c $search)
 	if [ "$count" -eq 1 ]; then
-		branch=$(gb -a | grep $1 | sed 's/remotes\/origin\///g' | uniq )
+		branch=$(gb -a | grep $search | sed 's/remotes\/origin\///g' | uniq )
 		echo "$branch" | cbcopy
 		echo -e "\x1b[93m$branch [copied]"
 	else
 		echo "$count matches:"
-		gb -a | grep $1 | sed 's/remotes\/origin\///g' | uniq
+		gb -a | grep $search | sed 's/remotes\/origin\///g' | uniq
 	fi
 }
 
@@ -78,9 +79,10 @@ alias gset='git reset; git checkout .; git clean -i -d'
 # undo last git commit
 alias gundo='git reset --soft HEAD~1'
 
-# git checkout { branch }
+# git checkout { branchName }
 gc(){
-	git checkout "$1"
+	branch=${1:?Missing parameter: branchName}
+	git checkout "$branch"
 }
 
 # git checkout .
@@ -93,23 +95,28 @@ alias gcm='gc master'
 alias gccb='gc $(cbpaste)'
 
 # create a new branch { branchName }
-alias gcb='git checkout -b'
+alias gcb='gc -b'
 
 # clone a git repo for development { gitHost } { organization } { projectName } { cdAlias? } { ...label?=projectName }
 gclone(){
 
+	gitHost=${1:?Missing parameter: gitHost}
+	org=${2:?Missing parameter: organization}
+	proj=${3:?Missing parameter: projectName}
+	alias=$4
+
 	# cd into development dir
 	dev;
 
-	git clone git@$1.com:$2/$3.git;
+	git clone git@${gitHost}.com:${org}/${proj}.git;
 
-	cd "$(basename $3)";
+	cd "$(basename $proj)";
 
-	if [ "$4" ]; then
-		[ "$5" ] && label="${@:5}" || label="$3"
+	if [ -n "$alias" ]; then
+		[ -n "$5" ] && label="${@:5}" || label="$proj"
 	
 		# Add local alias for this project
-		cda . "$4" "$label";
+		cda . "$alias" "$label";
 	fi
 }
 
@@ -122,10 +129,16 @@ alias glc='gclone gitlab'
 # Create a Git Repo { gitHost } { organization } { projectName } { cdAlias? } { ...label?=projectName }
 gcreate(){
 
+	gitHost=${1:?Missing parameter: gitHost}
+	org=${2:?Missing parameter: organization}
+	proj=${3:?Missing parameter: projectName}
+	alias=$4
+
 	#cd into development dir
 	dev;
 
-	mkdir "$3";cd "$3";
+	mkdir "$proj";
+	cd "$proj";
 
 	# Initialize git with an empty README
 	# ( for something to commit )
@@ -135,18 +148,25 @@ gcreate(){
 	# Add and Commit
 	gac initial commit;
 
-	# Add the remove
-	git remote add orign git@$1.com:$2/$3.git;
+	# Add the remote
+	git remote add orign git@${gitHost}.com:${org}/${proj}.git;
 
 	# push origin master
 	gup;
+
+	if [ -n "$alias" ]; then
+		[ -n "$5" ] && label="${@:5}" || label="$proj"
+	
+		# Add local alias for this project
+		cda . "$alias" "$label";
+	fi
 }
 
 
-# Create a GitHub repo
+# Create a GitHub repo { organization } { projectName } { cdAlias? } { ...label?=projectName }
 alias ghcreate='gcreate github'
 
-# Create a GitLab repo
+# Create a GitLab repo { organization } { projectName } { cdAlias? } { ...label?=projectName }
 alias glcreate='gcreate gitlab'
 
 # git commit { ...message? }
@@ -162,12 +182,19 @@ gcom(){
 # git add all modified files and commit { ...message? }
 alias gac='gad;gcom'
 
+# git add all modified files, commit, and push up { ...message? }
+gacs(){
+	gac ${@:1};
+	gup;
+}
+
 # Git Ignore: Preview a .gitignore from gitignore.io { programmingLanguage }
 gi(){
+	lang=${1:?Missing parameter: programmingLanguage}
 	curl -sL gitignore.io/api/"$1"
 }
 
 # Git Ignore Save: Grab a .gitignore from gitignore.io and save it to the current project { programmingLanguage }
 gis(){
-	gi > .gitignore
+	gi "$1" > .gitignore
 }

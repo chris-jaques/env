@@ -4,7 +4,7 @@
 #
 #
 
-# Install Docker
+# Install Docker { version=latest }
 i_docker(){
 	#[[ -z $1 ]] && version='latest' || version=$1
 	# download and install docker into '/usr/bin'
@@ -63,8 +63,11 @@ alias dcd="docker-compose down"
 # docker build
 alias db="docker build"
 
-# docker build tag { tagName }
-alias dbt="db . -t"
+# docker build tag { tagName } { ...flags? }
+dbt(){
+	tagName=${1:?Missing parameter: tagName}
+	db . -t $tagName ${@:2}
+}
 
 # docker run and cleanup
 alias dr="docker run --rm"
@@ -77,6 +80,7 @@ alias ds="docker search"
 
 # Spin up a container, ssh into it and mount the env { image } { command=/bin/bash } { ...extraTags? }
 dssh(){
+	image=${1:?Missing parameter: image}
 	[ -z "$2" ] && cmd='/bin/bash' || cmd="$2"
 
 	# Copy the command to activate the env inside the container
@@ -86,7 +90,7 @@ dssh(){
 	dri \
 	-v $(e;pwd):/root/env \
 	${@:3} \
-	"$1" \
+	"$image" \
 	$cmd
 }
 
@@ -102,15 +106,17 @@ dsh(){
 
 # Run Bash on Docker-Compose Service { serviceName }
 dcbash(){
-	docker-compose exec $1 /bin/bash
+	serviceName=${1:?Missing parameter: serviceName}
+	docker-compose exec $serviceName /bin/bash
 }
 
 # Run sh on Docker-Compose Service { serviceName }
 dcsh(){
-	docker-compose exec $1 /bin/sh
+	serviceName=${1:?Missing parameter: serviceName}
+	docker-compose exec $serviceName /bin/sh
 }
 
-# Dockerized npm. Run npm on the current directory, from within a Docker container { command }
+# Dockerized npm. Run npm on the current directory, from within a Docker container { ...command }
 dnpm(){
 	if ! [ -f ~/.npmrc ]; then
 		touch ~/.npmrc

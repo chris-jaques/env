@@ -65,5 +65,5 @@ fi
 if ! grep -q "git.*~/env pull origin master" ~/.bashrc; then
     echo "Adding git pull to .bashrc"
     echo "# Pull latest version of env from github
-git -C ~/env pull origin master &> /dev/null;" >> ~/.bashrc
+    git -C ~/env pull origin master &> /dev/null;" >> ~/.bashrc
 fi

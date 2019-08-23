@@ -13,29 +13,34 @@ i_chrome(){
 }
 
 
-# open web browser { website } { queryString }
+# open web browser { website } { ...queryString? }
 web(){ 
-    url="http://"$1"${@:2}";
+    website=${1:?Missing parameter: website}
+
+    url="http://"$website"${@:2}";
     echo $url;
     ismac && command open "$url" || xdg-open "$url" ;
 }
 
-# Google Search { ...searchString }
+# Google Search { ...searchString? }
 goo(){
     searchString="${@:1}"
     web www.google.com/search?q= "$searchString"
 }
 
 # SuperLIFT Invoice Breakdown { invoiceNumber }
-alias inv="web superlift.theliftsystem.com/invoices/breakdown/"
+inv(){
+    invoiceNumber=${1:?Missing parameter: invoiceNumber}
+    web "superlift.theliftsystem.com/invoices/breakdown/" "$invoiceNumber"
+}
 
-# Docker Hub Search { search }
+# Docker Hub Search { search? }
 alias dh="web hub.docker.com/search?q="
 
 # Docker hub Lucky Search { search }
 alias dhl="web hub.docker.com/_/"
 
-# explain Shell { cmd }
+# explain Shell { ...cmd }
 xsh(){
     cmd="${@:1}"
     web explainshell.com/explain?cmd= "$cmd"

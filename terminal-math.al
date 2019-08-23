@@ -28,7 +28,7 @@ i_math(){
     popd
 }
 
-# Terminal-Math { expression }
+# Terminal-Math { ...expression }
 m(){
     # Execute math function and copy results to clipboard
     python3 ~/terminal-math.py ${@:1} | cbcopy;
