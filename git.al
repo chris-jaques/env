@@ -30,14 +30,14 @@ alias gb='git branch'
 # git branch search { searchString }
 gbs(){
 	search=${1:?Missing parameter: searchString}
-	count=$(gb -a | grep $search | sed 's/remotes\/origin\///g' | uniq | grep -c $search)
+	count=$(gb -a | grep $search | sed 's/\*/ /g' | sed 's/HEAD.*//g' | sed 's/remotes\/origin\///g' | sort | uniq | grep -c $search)
 	if [ "$count" -eq 1 ]; then
-		branch=$(gb -a | grep $search | sed 's/remotes\/origin\///g' | uniq )
+		branch=$(gb -a | grep $search | sed 's/\*/ /g' | sed 's/HEAD.*//g' | sed 's/remotes\/origin\///g' | sort | uniq | grep $search )
 		echo "$branch" | cbcopy
 		echo -e "\x1b[93m$branch [copied]"
 	else
 		echo "$count matches:"
-		gb -a | grep $search | sed 's/remotes\/origin\///g' | uniq
+		gb -a | grep $search | sed 's/\*/ /g' | sed 's/HEAD.*//g' | sed 's/remotes\/origin\///g' | sort | uniq | grep $search
 	fi
 }
 
