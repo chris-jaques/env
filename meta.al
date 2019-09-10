@@ -14,12 +14,18 @@ i_meta(){
 as(){
     keyword=${1:?Missing parameter: keyword}
     [ -z "$keyword" ] && args="" || args="${@:1}"
-    python3 ~/env/search.py "$args" | less -r
+
+    matches=$(python3 $(e;pwd)/search.py "$args" | grep -c "$args")
+    if [[ $matches -gt 1 ]]; then
+        python3 $(e;pwd)/search.py "$args" | less -r
+    else
+        python3 $(e;pwd)/search.py "$args"
+    fi
 }
 
 # Alias Search(debug) { keyword }
 asd(){
     keyword=${1:?Missing parameter: keyword}
     [ -z "$keyword" ] && args="" || args="${@:1}"
-    python3 ~/env/search.py "$args" -d | less -r
+    python3 $(e;pwd)/search.py "$args" -d | less -r
 }
