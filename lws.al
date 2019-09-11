@@ -6,20 +6,31 @@
 
 # Install the LIFT CLI
 i_lift_cli(){
-    ghc llwebsol LIFT-CLI cli LIFT CLI
+    ghc llwebsol lift-cli cli LIFT CLI
 }
-
-# Build the LIFT CLI
-alias lclibuild='$(cli;pwd)/build.sh'
 
 # Lift CLI
 alias lcli='$(cli;pwd)/run.sh'
 
-# Find a LIFT Client { clientName || clientID }
-alias client='lcli find:client'
+# Find a LIFT Client { searchTerm }
+alias client='lfind client'
+
+# Find a LIFT User { searchTerm }
+alias user='lfind user'
+
+# Find a LIFT Building { searchTerm }
+alias building='lfind building'
+
+# Find something with the lift cli { entity } { ...searchTerm }
+lfind(){
+    entity=${1:?Missing parameter: entity}
+    searchTerm=${2:?Missing parameter: searchTerm}
+
+    lcli find:$entity $searchTerm
+}
 
 # Deploy Master LIFT Branch to Staging
-alias deploymaster='lcli deploy lift'
+alias deploylift='lcli deploy lift'
 
 # SSH Into Web1 Server
 alias sshweb='ssh chris@web1.landlordwebsolutions.com'
