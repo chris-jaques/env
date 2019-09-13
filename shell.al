@@ -136,3 +136,10 @@ sudo_i(){
 
 # Repeat the last command and pipe the results to Less
 alias rl="fc -s | less -r"
+
+# Get the Raw code from an alias { aliasName }
+rawalias(){
+  aliasName="${1:?Missing parameter: aliasName}"
+  raw=$(grep -P "alias $aliasName=" $(e;pwd)/*.al | sed 's/.*=//g' | sed "s/[\'\"]//g")
+  echo $raw;
+}
