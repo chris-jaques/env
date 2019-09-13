@@ -93,7 +93,7 @@ mapset(){
   key="${1:?Missing parameter: key}"
   value="${2:?Missing parameter: value}"
 
-  [ -z "$3" ] && file=".envmap" || file="$2"
+  [ -z "$3" ] && file=".envmap" || file="$3"
   file="$HOME/$file"
   [ ! -f "$file" ] && touch "$file"
   # lookup existing value
@@ -103,6 +103,24 @@ mapset(){
     echo "$key:$value" >> $file
   else sed -i "/^$key:/c$key:$value" $file;
   fi
+}
+
+# List all vars in the map storage { configFile=.envmap }
+maplist(){
+  [[ -z $1 ]] && file=".envmap" || file="$1"
+  file="$HOME/$file"
+
+  cat $file;
+}
+
+# Delete a Value from the Map Storage { key } { configFile=.envmap }
+mapdel(){
+  key="${1:?Missing parameter: key}"
+  
+  [ -z "$2" ] && file=".envmap" || file="$2"
+  file="$HOME/$file"
+
+  sed -i "/^$key\:/d" $file
 }
 
 # Reset Env
