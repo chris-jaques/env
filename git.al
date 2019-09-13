@@ -155,3 +155,15 @@ gi(){
 gis(){
 	gi "$1" > .gitignore
 }
+
+# Open a git project in the browser { cdAlias? }
+gopen(){
+	if [[ -z $1 ]]; then
+		addr=$(git config --get remote.origin.url | sed 's/git@//g' | sed 's/\:/\//g')
+	else
+		projectPathCd=$(rawalias $1)
+		addr=$($projectPathCd;git config --get remote.origin.url | sed 's/git@//g' | sed 's/\:/\//g')
+	fi
+	
+	web $addr
+}
