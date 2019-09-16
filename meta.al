@@ -15,7 +15,7 @@ as(){
     keyword=${1:?Missing parameter: keyword}
     [ -z "$keyword" ] && args="" || args="${@:1}"
 
-    matches=$(python3 $(e;pwd)/search.py "$args" | grep -c "$args")
+    matches=$(python3 $(e;pwd)/search.py "$args" | grep -ci "$args")
     if [[ $matches -gt 1 ]]; then
         python3 $(e;pwd)/search.py "$args" | less -r
     else
