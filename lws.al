@@ -21,10 +21,10 @@ alias user='lfind user'
 # Find a LIFT Building { searchTerm }
 alias building='lfind building'
 
-# Find something with the lift cli { entity } { ...searchTerm }
+# Find something with the lift cli { entity } { ...searchTerm? }
 lfind(){
     entity=${1:?Missing parameter: entity}
-    searchTerm=${2:?Missing parameter: searchTerm}
+    searchTerm=$2
 
     lcli find:$entity $searchTerm
 }
