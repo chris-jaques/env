@@ -18,9 +18,6 @@ i_math(){
     git clone git@github.com:chris-jaques/terminal-math.git
     cd terminal-math
 
-    # symlink to ~/terminal-math.py
-    ln -s $(pwd)/terminal-math.py ~/terminal-math.py
-
     # add an alias to the terminal-math project in local.al
     cda . math Terminal Math
 
@@ -31,7 +28,7 @@ i_math(){
 # Terminal-Math { ...expression }
 m(){
     # Execute math function and copy results to clipboard
-    python3 ~/terminal-math.py ${@:1} | cbcopy;
+    python3 $(math;pwd)/terminal-math.py ${@:1} | cbcopy;
 
     # Output results to terminal
     cbpaste;
