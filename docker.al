@@ -26,7 +26,7 @@ i_docker(){
 	systemctl enable docker
 	systemctl start docker
 	# install docker-compose
-	i_docker-compose
+	i_dockercompose
 	# verify
 	docker --version
 	docker-compose --version
