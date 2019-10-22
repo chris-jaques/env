@@ -24,8 +24,8 @@ shget() {
 
 	[[ -z "$label" ]] && key=~/.ssh/id_rsa.pub || key=~/.ssh/$label.pub
     if [ -f "$key" ]; then
-	    cat $key | cbcopy
-	    echo -e "\x1b[93m[ $key ]\n\x1b[0m$(cbpaste)\x1b[93m\n[copied]"
+	    value=$(cat $key)
+	    echocopy "$key" "$value"
     else
         echo "No public key Found for $label."
     fi

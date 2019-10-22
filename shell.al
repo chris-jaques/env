@@ -83,9 +83,12 @@ mapget(){
   [ -z "$2" ] && file=".envmap" || file="$2"
   file="$HOME/$file"
   # find in map file
-  value=$(grep "^$key:" $file)
-  # parse and return value
-  echo ${value/"$key:"/""}
+  entry=$(grep "^$key:" $file)
+  # parse value
+  value=${entry/"$key:"/""}
+
+  # Echo and copy value to clipboard
+  echocopy "$key" "$value"
 }
 
 # Generic Map Storage - Set Value { key } { value } { configFile=.envmap }
@@ -142,4 +145,19 @@ rawalias(){
   aliasName="${1:?Missing parameter: aliasName}"
   raw=$(grep -P "alias $aliasName=" $(e;pwd)/*.al | sed 's/.*=//g' | sed "s/[\'\"]//g")
   echo $raw;
+}
+
+# Echo a key/value pair and copy the value to the clipboard { label?=output } { output }
+echocopy(){
+  if [ -z "$2" ]; then
+    output="${1:?Missing parameter: output}"
+    label="$output"
+  else
+    output="$2"
+    label="$1"
+    echo -e "\x1b[93m[ $label ]"
+  fi
+
+  echo $output | cbcopy
+  echo -e "\x1b[0m${output}\x1b[93m\n[copied]"
 }
