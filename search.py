@@ -58,6 +58,7 @@ def searchFile(filename, keyword):
 
             match_lines = []
             in_function = False
+            functionNameMatch = False
             match = False
             header = True
 
@@ -77,7 +78,13 @@ def searchFile(filename, keyword):
                     # Trivial Case : Alias Match
                     if(re.match(r'^alias\ ', line)):
                         if debug: print("Alias")
-                        matches.append(match_lines)
+                        if(re.match(r'^alias ' + keyword + "=", line)):
+                            if nameMatchOnly:
+                                printMatch(match_lines,keyword)
+                                exit()
+                            matches.insert(0,match_lines)
+                        else:
+                            matches.append(match_lines)
                         match_lines = []
                         match = False
 
@@ -85,18 +92,28 @@ def searchFile(filename, keyword):
                 if(re.match(r"^[a-z\_\-]+\(\)\ ?\{",line,re.IGNORECASE)):
                     in_function = True
                     if debug: print("In a Function: ")
+                    if(re.match(r"^" + keyword + "\(\)\ ?{",line)):
+                        functionNameMatch = True
                 elif(in_function and re.match(r'^}$',line)):
                     if debug: print("End of Function ")
                     in_function = False
                     if match:
-                        matches.append(match_lines)
+                        if functionNameMatch:
+                            if nameMatchOnly:
+                                printMatch(match_lines,keyword)
+                                exit()
+                            matches.insert(0,match_lines)
+                        else:
+                            matches.append(match_lines)
                     match_lines = []
                     match = False
+                    functionNameMatch = False
 
                 if not in_function and re.match('^$',line):
                     if match:
                         matches.append(match_lines)
                     match_lines = []
+                    functionNameMatch = False
     return matches
 
 def printMatch(match_lines, keyword):
@@ -128,14 +145,24 @@ if len(sys.argv) > 1:
 else:
     search_string = " "
 
+nameMatchOnly = False
+if len(sys.argv) > 2 and sys.argv[2] == '-n':
+    nameMatchOnly = True
+
 debug = (False,True)[len(sys.argv) > 2 and sys.argv[2] == "-d"]
 
 reset()
+
+output = []
 for root, dirs, files in os.walk(env_dir):
         for file in files:
             if file.endswith(".al"):
                 matches = searchFile(env_dir + "/" + file, search_string)
                 if len(matches) > 0:
-                    printFileHeader(file,len(matches))
-                    for match in matches:
-                        printMatch(match,search_string)
+                    output.append({"file": file, "matches": matches})
+
+if len(output) > 0:
+    for fileoutput in output:
+        printFileHeader(file,len(fileoutput["matches"]))
+        for match in fileoutput["matches"]:
+            printMatch(match,search_string)

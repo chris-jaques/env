@@ -23,6 +23,14 @@ as(){
     fi
 }
 
+# Alias Name Search { aliasName }
+ans(){
+    keyword=${1:?Missing parameter: keyword}
+    [ -z "$keyword" ] && args="" || args="${@:1}"
+ 
+    python3 $(e;pwd)/search.py "$args" -n
+}
+
 # Alias Search(debug) { keyword }
 asd(){
     keyword=${1:?Missing parameter: keyword}
