@@ -40,7 +40,7 @@ cbpaste(){
 }
 
 # override ls to always show hidden files.
-alias ls='ls -a --color'
+alias ls='ismac && ls -a --color || ls -a'
 
 # ls list
 alias lsl='ls -la'
