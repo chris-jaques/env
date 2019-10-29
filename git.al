@@ -6,7 +6,7 @@
 
 # Install git
 i_git(){
-	apt update && apt install -y git
+	pinstall git
 }
 
 # Show git Commit History

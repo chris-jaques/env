@@ -6,8 +6,7 @@
 
 # Install Metadata Tools
 i_meta(){
-    apt update
-    apt install -y python3 less
+    pinstall python3 less
 }
 
 # Alias Search { ...keyword }
