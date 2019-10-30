@@ -23,7 +23,7 @@ def fg(color):
         'w': "\x1b[37m",
 
         # Blue
-        'bl': "\x1b[94m",
+        'bl': "\x1b[38;5;81m",
 
         # Cyan
         'c': "\x1b[36m"
