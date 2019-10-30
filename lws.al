@@ -37,3 +37,9 @@ alias sshweb='ssh chris@web1.landlordwebsolutions.com'
 
 # SSH Into DB Server
 alias sshdb='ssh chris@db.landlordwebsolutions.com'
+
+# SuperLIFT Invoice Breakdown { invoiceNumber }
+inv(){
+    invoiceNumber=${1:?Missing parameter: invoiceNumber}
+    web "superlift.theliftsystem.com/invoices/breakdown/" "$invoiceNumber"
+}

@@ -28,12 +28,6 @@ goo(){
     web www.google.com/search?q= "$searchString"
 }
 
-# SuperLIFT Invoice Breakdown { invoiceNumber }
-inv(){
-    invoiceNumber=${1:?Missing parameter: invoiceNumber}
-    web "superlift.theliftsystem.com/invoices/breakdown/" "$invoiceNumber"
-}
-
 # Docker Hub Search { search? }
 alias dh="web hub.docker.com/search?q="
 
