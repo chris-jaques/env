@@ -17,7 +17,7 @@ i_chrome(){
 web(){ 
     website=${1:?Missing parameter: website}
 
-    url="http://"$website"${@:2}";
+    url="https://"$website"${@:2}";
     echo $url;
     ismac && command open "$url" || xdg-open "$url" ;
 }
