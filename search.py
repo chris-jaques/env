@@ -163,6 +163,6 @@ for root, dirs, files in os.walk(env_dir):
 
 if len(output) > 0:
     for fileoutput in output:
-        printFileHeader(file,len(fileoutput["matches"]))
+        printFileHeader(fileoutput["file"],len(fileoutput["matches"]))
         for match in fileoutput["matches"]:
             printMatch(match,search_string)
