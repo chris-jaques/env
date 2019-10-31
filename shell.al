@@ -39,17 +39,11 @@ cbpaste(){
   fi
 }
 
-# override ls to always show hidden files with color. { ...flags? }
-ls(){
-  if ismac; then
-    command ls -a -G ${@:1}
-  else
-    command ls -a --colors ${@:1}
-  fi
-}
+# override ls to always show hidden files with color.
+alias ls='ismac && ls -a -G || ls -a --color'
 
 # ls list
-alias lsl='ls -l'
+alias lsl='ismac && command ls -la -G || command ls -la --color'
 
 # grep recursive, case-insensitive, filename only { searchString }
 alias g='grep -ril'
