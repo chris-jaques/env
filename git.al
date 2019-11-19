@@ -33,8 +33,7 @@ gbs(){
 	count=$(gb -a | grep $search | sed 's/\*/ /g' | sed 's/HEAD.*//g' | sed 's/remotes\/origin\///g' | sort | uniq | grep -c $search)
 	if [ "$count" -eq 1 ]; then
 		branch=$(gb -a | grep $search | sed 's/\*/ /g' | sed 's/HEAD.*//g' | sed 's/remotes\/origin\///g' | sort | uniq | grep $search )
-		echo "$branch" | cbcopy
-		echo -e "\x1b[93m$branch [copied]"
+		echocopy "$branch"
 	else
 		echo "$count matches:"
 		gb -a | grep $search | sed 's/\*/ /g' | sed 's/HEAD.*//g' | sed 's/remotes\/origin\///g' | sort | uniq | grep $search

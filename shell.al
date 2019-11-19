@@ -159,5 +159,5 @@ echocopy(){
   fi
 
   echo $output | cbcopy
-  echo -e "\x1b[0m${output}\x1b[93m\n[copied]"
+  echo -e "\x1b[0m${output}\x1b[93m\n[copied]\x1b[0m"
 }
