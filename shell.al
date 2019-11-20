@@ -147,17 +147,17 @@ rawalias(){
   echo $raw;
 }
 
-# Echo a key/value pair and copy the value to the clipboard { label?=output } { output }
+# Echo a value (with an optional key) and copy it to the clipboard { key? } { value }
 echocopy(){
   if [ -z "$2" ]; then
-    output="${1:?Missing parameter: output}"
-    label="$output"
+    value="${1:?Missing parameter: value}"
   else
-    output="$2"
-    label="$1"
-    echo -e "\x1b[93m[ $label ]"
+    value="$2"
+    key="$1"
+
+    echo -e "\x1b[93m[ $key ]"
   fi
 
-  echo $output | cbcopy
-  echo -e "\x1b[0m${output}\x1b[93m\n[copied]\x1b[0m"
+  echo $value | cbcopy
+  echo -e "\x1b[0m${value}\x1b[93m\n[copied]\x1b[0m"
 }
