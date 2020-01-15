@@ -17,3 +17,17 @@ i_gcp(){
 
     popd
 }
+
+# Get the current gcloud project
+ggproject(){ 
+    gcloud config get-value project
+}
+
+# Setup gcloud dev creds    
+ggdev(){
+  export GOOGLE_CLOUD_PROJECT=`ggproject`
+  export GOOGLE_APPLICATION_CREDENTIALS=$PWD/secret.json
+  export GOOGLE_APPLICATION_CREDENTIALS_DKC=/secret.json
+  export GOOGLE_APPLICATION_CREDENTIALS_DK=/`basename $PWD`/secret.json
+  export GOOGLE_PROJECT=`ggproject`
+}
