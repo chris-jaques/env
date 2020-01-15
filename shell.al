@@ -39,11 +39,20 @@ cbpaste(){
   fi
 }
 
+# Generic directory listing (in color)
+dir(){
+  if ismac; then
+    ls -G ${@:1}
+  else
+    ls --color ${@:1}
+  fi
+}
+
 # override ls to always show hidden files with color.
-alias ls='ismac && ls -a -G || ls -a --color'
+alias ls='dir -a'
 
 # ls list
-alias lsl='ismac && command ls -la -G || command ls -la --color'
+alias lsl='ls -l'
 
 # grep recursive, case-insensitive, filename only { searchString }
 alias g='grep -ril'
