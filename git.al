@@ -96,6 +96,15 @@ alias gccb='gc $(cbpaste)'
 # create a new branch { branchName }
 alias gcb='git checkout -b'
 
+# Delete a branch { name }
+gbd(){
+	name=${1:?Missing parameter: name}
+	replaced='remotes/origin/'
+	name="${name/$replaced/}"
+	git branch -D ${name}
+	git push -d origin ${name}
+}
+
 # clone a git repo for development { gitHost } { organization } { projectName } { cdAlias? } { ...label=projectName }
 gclone(){
 
