@@ -12,8 +12,7 @@ i_shell_env(){
 # Copy install command to the clipboard
 bootstrapcmd(){
   line='curl https://raw.githubusercontent.com/chris-jaques/env/master/install.sh | sh'
-  echo $line | cbcopy
-  echo $line
+  echocopy "$line"
 }
 
 # Is Mac?
