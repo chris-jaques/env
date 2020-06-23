@@ -19,3 +19,8 @@ fi
 if [ "$(command -v thefuck)" ]; then
     eval $(thefuck --alias)
 fi
+
+# Pull down latest env version
+if [ -z $ENV_SKIP_GIT_PULL ]; then
+    git -C ~/env pull origin master &> /dev/null
+fi
