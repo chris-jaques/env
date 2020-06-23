@@ -116,6 +116,17 @@ dcsh(){
 	docker-compose exec $serviceName /bin/sh
 }
 
+# Pull a docker image { imageName } { ...extraFlags? }
+dp(){
+	imageName=${1:?Missing parameter: imageName}
+	d pull $imageName ${@:2}
+}
+
+# Pull a docker image quietly { imageName }
+dpq(){
+	dp $1 -q
+}
+
 # Dockerized npm. Run npm on the current directory, from within a Docker container { ...command }
 dnpm(){
 	if ! [ -f ~/.npmrc ]; then
