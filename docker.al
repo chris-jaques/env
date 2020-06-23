@@ -134,3 +134,9 @@ dnpm(){
 	fi
 	dri -v $(pwd):/npm -w /npm -u $(id -u) -v ~/.npmrc:/home/node/.npmrc node npm "${@:1}"
 }
+
+# Calls all _pull_* aliases in env to update all docker images
+pull_env_images(){
+	# TODO: loop through all aliases for _pull_* and call them
+	_pull_tm
+}
