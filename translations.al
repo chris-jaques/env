@@ -4,14 +4,12 @@
 #
 #
 
-# Install Translate-Shell
-i_trans(){
-    pushd ~/Downloads
-    pinstall wget gawk
-    wget git.io/trans
-    chmod +x ./trans
-    mv trans /usr/local/bin/trans
-}
+# Translate Shell image from Docker Hub
+export ENV_DOCKER_IMAGE_TRANSLATE_SHELL='soimort/translate-shell:latest'
+
+# Translate Shell
+alias trans='dri $ENV_DOCKER_IMAGE_TRANSLATE_SHELL'
+
 # Translate Chinese to English
 alias t='trans zh:en'
 
