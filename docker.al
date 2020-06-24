@@ -129,12 +129,16 @@ dpq(){
 
 # Pulls the latest images for all docker images used by env { quiet=False }
 pull_latest_env_images(){
+	
 	# All env image env vars begin with this prefix
 	IMAGE_VAR_PREFIX="ENV_DOCKER_IMAGE_"
+
 	# loop through all image env vars and update them
 	env | grep $IMAGE_VAR_PREFIX | while read -r IMAGE_VAR ; do
+	
 		# Pull out the image part 
 		IMAGE=$(echo $IMAGE_VAR | sed "s/.*=//" )
+		
 		# Pull $NAME from the alias name ( minus the PULL_ALIAS_PREFIX )
 		NAME=$(echo $IMAGE_VAR | sed "s/=.*//" | sed "s/$IMAGE_VAR_PREFIX//")
 
