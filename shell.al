@@ -163,9 +163,16 @@ echocopy(){
     value="$2"
     key="$1"
 
-    echo -e "\x1b[93m[ $key ]"
+    echo $(highlight "[ $key ]")
   fi
 
   echo $value | cbcopy
-  echo -e "\x1b[0m${value}\x1b[93m\n[copied]\x1b[0m"
+  echo "${value}"
+  echo $(highlight "[copied]")
+}
+
+# Echo some text in yellow { ...text? }
+highlight(){
+  text="${@:1}"
+  echo -en "\x1b[93m$text\x1b[0m"
 }
