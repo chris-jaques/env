@@ -7,7 +7,7 @@
 export TERMINAL_MATH_IMAGE_VERSION="latest"
 
 # Pull latest version of terminal-math
-alias _pull_tm='dpq siege4/terminal-math:$TERMINAL_MATH_IMAGE_VERSION'
+alias _docker_pull_terminal-math="dpq siege4/terminal-math:${TERMINAL_MATH_IMAGE_VERSION}"
 
 # Terminal-Math { ...expression }
 m(){

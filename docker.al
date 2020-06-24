@@ -135,8 +135,19 @@ dnpm(){
 	dri -v $(pwd):/npm -w /npm -u $(id -u) -v ~/.npmrc:/home/node/.npmrc node npm "${@:1}"
 }
 
-# Calls all _pull_* aliases in env to update all docker images
-pull_env_images(){
-	# TODO: loop through all aliases for _pull_* and call them
-	_pull_tm
+# Pulls the latest images for all docker images used by env
+pull_latest_env_images(){
+	# All aliases that begin with this string will be executed
+	PULL_ALIAS_PREFIX="_docker_pull_"
+	# loop through all aliases and call them directly
+	alias | grep $PULL_ALIAS_PREFIX | while read -r CMD_ALIAS ; do
+		# Pull out the command part of |alias xyz='CMD'|
+		CMD=$(echo $CMD_ALIAS | sed "s/.*=\'//" | sed "s/.$//" )
+		# Pull $NAME from the alias name ( minus the PULL_ALIAS_PREFIX )
+		NAME=$(echo $CMD_ALIAS | sed "s/=.*//" | sed "s/alias $PULL_ALIAS_PREFIX//")
+
+		echo "Pulling latest image for $(highlight $NAME)..."
+		eval $CMD
+	done
+	echo "finished."
 }
