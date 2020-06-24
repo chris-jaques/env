@@ -127,27 +127,24 @@ dpq(){
 	dp $1 -q
 }
 
-# Dockerized npm. Run npm on the current directory, from within a Docker container { ...command }
-dnpm(){
-	if ! [ -f ~/.npmrc ]; then
-		touch ~/.npmrc
-	fi
-	dri -v $(pwd):/npm -w /npm -u $(id -u) -v ~/.npmrc:/home/node/.npmrc node npm "${@:1}"
-}
-
-# Pulls the latest images for all docker images used by env
+# Pulls the latest images for all docker images used by env { quiet=False }
 pull_latest_env_images(){
-	# All aliases that begin with this string will be executed
-	PULL_ALIAS_PREFIX="_docker_pull_"
-	# loop through all aliases and call them directly
-	alias | grep $PULL_ALIAS_PREFIX | while read -r CMD_ALIAS ; do
-		# Pull out the command part of |alias xyz='CMD'|
-		CMD=$(echo $CMD_ALIAS | sed "s/.*=\'//" | sed "s/.$//" )
+	# All env image env vars begin with this prefix
+	IMAGE_VAR_PREFIX="ENV_DOCKER_IMAGE_"
+	# loop through all image env vars and update them
+	env | grep $IMAGE_VAR_PREFIX | while read -r IMAGE_VAR ; do
+		# Pull out the image part 
+		IMAGE=$(echo $IMAGE_VAR | sed "s/.*=//" )
 		# Pull $NAME from the alias name ( minus the PULL_ALIAS_PREFIX )
-		NAME=$(echo $CMD_ALIAS | sed "s/=.*//" | sed "s/alias $PULL_ALIAS_PREFIX//")
+		NAME=$(echo $IMAGE_VAR | sed "s/=.*//" | sed "s/$IMAGE_VAR_PREFIX//")
 
 		echo "Pulling latest image for $(highlight $NAME)..."
-		eval $CMD
+		if [ -z $1 ]; then
+			dp $IMAGE
+		else
+			# Pull Quietly
+			dpq $IMAGE
+		fi
 	done
 	echo "finished."
 }

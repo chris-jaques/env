@@ -3,13 +3,13 @@
 # Firebase
 #
 
-# Pull latest version of firebase image
-alias _docker_pull_firebase="dpq andreysenov/firebase-tools"
+# Firebase image from Docker Hub
+export ENV_DOCKER_IMAGE_FIREBASE="andreysenov/firebase-tools:latest"
 
 # Firebase { ...commands }
 fb(){
     # Ensure config folder exists
     mkdir -p ~/.config/configstore;
-    
-    dri -v $(pwd):/workspace -v ~/.config/configstore:/home/node/.config/configstore -w /workspace -u $(id -u) -p 9005:9005 andreysenov/firebase-tools firebase
+
+    dri -v $(pwd):/workspace -v ~/.config/configstore:/home/node/.config/configstore -w /workspace -u $(id -u) -p 9005:9005 $ENV_DOCKER_IMAGE_FIREBASE firebase
 }
