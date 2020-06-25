@@ -5,7 +5,7 @@
 #
 
 # Python image from Docker Hub
-export ENV_DOCKER_IMAGE_PYTHON="python:3.7"
+export ENV_DOCKER_IMAGE_PYTHON="python:3.7-alpine"
 
 # Dockerized Python
 dpy(){
