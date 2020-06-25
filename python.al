@@ -4,6 +4,14 @@
 #
 #
 
+# Python image from Docker Hub
+export ENV_DOCKER_IMAGE_PYTHON="python:3.7"
+
+# Dockerized Python
+dpy(){
+    dri -v $PWD:$PWD -w $PWD $ENV_DOCKER_IMAGE_PYTHON python ${@:1}
+}
+
 # Run Unit Tests { ...testFiles? }
 pytest(){ 
     python -m unittest ${@:1}
