@@ -4,9 +4,12 @@
 #
 #
 
-# Install Metadata Tools
-i_meta(){
-    pinstall python3 less
+# Env-Search image from Docker Hub
+export ENV_DOCKER_IMAGE_ENV_SEARCH="siege4/env-search:latest"
+
+# Dockerized Alias Search { ...keyword }
+alias-search(){
+    dr -v $(e;pwd):/root/env $ENV_DOCKER_IMAGE_ENV_SEARCH search ${@:1}
 }
 
 # Alias Search { ...keyword }
@@ -14,11 +17,11 @@ as(){
     keyword=${1:?Missing parameter: keyword}
     [ -z "$keyword" ] && args="" || args="${@:1}"
 
-    matches=$(python3 $(e;pwd)/search.py "$args" | grep -ci "$args")
+    matches=$(alias-search "$args" | grep -ci "$args")
     if [[ $matches -gt 1 ]]; then
-        python3 $(e;pwd)/search.py "$args" | less -r
+        alias-search "$args" | less -r
     else
-        python3 $(e;pwd)/search.py "$args"
+        alias-search "$args"
     fi
 }
 
@@ -27,12 +30,12 @@ ans(){
     keyword=${1:?Missing parameter: keyword}
     [ -z "$keyword" ] && args="" || args="${@:1}"
  
-    python3 $(e;pwd)/search.py "$args" -n
+    alias-search "$args" -n
 }
 
 # Alias Search(debug) { keyword }
 asd(){
     keyword=${1:?Missing parameter: keyword}
     [ -z "$keyword" ] && args="" || args="${@:1}"
-    python3 $(e;pwd)/search.py "$args" -d | less -r
+    alias-search "$args" -d | less -r
 }
