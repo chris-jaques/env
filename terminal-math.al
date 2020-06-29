@@ -9,7 +9,7 @@ export ENV_DOCKER_IMAGE_TERMINAL_MATH="siege4/terminal-math:latest"
 # Terminal-Math { ...expression }
 m(){
     # Execute math function and copy results to clipboard
-    dr -v ~/.terminal-math:/root/.terminal-math $ENV_DOCKER_IMAGE_TERMINAL_MATH m ${@:1} | cbcopy;
+    dr -v ~/.terminal-math:/root/.terminal-math $ENV_DOCKER_IMAGE_TERMINAL_MATH ${@:1} | cbcopy;
 
     # Output results to terminal
     cbpaste;
