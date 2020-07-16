@@ -75,8 +75,11 @@ alias gum='gup master'
 # reset all un-committed changes in git
 alias gset='git reset; git checkout .; git clean -i -d'
 
-# undo last git commit
-alias gundo='git reset --soft HEAD~1'
+# undo last git commit { numCommits=1 }
+gundo(){
+	[ -z $1 ] && numCommits=1 || numCommits=$1
+	git reset --soft HEAD~$numCommits
+}
 
 # git checkout { branchName }
 gc(){
