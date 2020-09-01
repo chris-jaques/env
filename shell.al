@@ -166,7 +166,7 @@ echocopy(){
     echo $(highlight "[ $key ]")
   fi
 
-  echo $value | cbcopy
+  echo -n $value | cbcopy
   echo "${value}"
   echo $(highlight "[copied]")
 }
