@@ -46,7 +46,7 @@ alias ga='git add'
 # git add dot
 alias gad='ga .'
 
-# git push { remote=origin } { branch=HEAD }
+# git push { remote?=origin } { branch=HEAD }
 gup(){
 	if [ -z $2 ]; then
 		[ -z $1 ] && branch='HEAD' || branch="$1"
@@ -56,7 +56,7 @@ gup(){
 	fi
 }
 
-# git pull { remote=origin } { branch=HEAD }
+# git pull { remote?=origin } { branch=HEAD }
 gdown(){
 	if [ -z $2 ]; then
 		[ -z $1 ] && branch='HEAD' || branch="$1"
