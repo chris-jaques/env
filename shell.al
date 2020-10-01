@@ -84,8 +84,14 @@ replaceAll(){
 # nano { filename? }
 alias n='nano'
 
-# Generic Map Storage - Retreive Value { key } { configFile=.envmap }
+# Generic Map Storage - Output and copy value to clipboard { key } { configFile=.envmap }
 mapget(){
+  # Echo and copy value to clipboard
+  echocopy $1 $(mapshow ${@:1})
+}
+
+# Generic Map Storage - Output value for key { key } { configFile=.envmap }
+mapshow(){
   key="${1:?Missing parameter: key}"
 
   [ -z "$2" ] && file=".envmap" || file="$2"
@@ -95,8 +101,7 @@ mapget(){
   # parse value
   value=${entry/"$key:"/""}
 
-  # Echo and copy value to clipboard
-  echocopy "$key" "$value"
+  echo "$value" 
 }
 
 # Generic Map Storage - Set Value { key } { value } { configFile=.envmap }
