@@ -75,6 +75,9 @@ alias dr="docker run --rm"
 # docker run and cleanup - interactive
 alias dri="docker run --rm -it"
 
+# docker-compose run
+alias dcr="docker-compose run"
+
 # Docker Search
 alias ds="docker search"
 
