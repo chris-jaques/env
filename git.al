@@ -156,6 +156,9 @@ gacs(){
 	gup;
 }
 
+# Cram updates into the previous commit
+alias gcram="git commit --amend --no-edit"
+
 # Git Ignore: Preview a .gitignore from gitignore.io { programmingLanguage }
 gi(){
 	lang=${1:?Missing parameter: programmingLanguage}
