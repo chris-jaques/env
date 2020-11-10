@@ -55,6 +55,11 @@ EOL
     mkdir -p ~/dev
 fi
 
+if ! [ -L ~/.vimrc ]; then
+    [ -f ~/.vimrc ] && rm ~/.vimrc
+    ln -s ~/env/.vimrc ~/.vimrc
+fi
+
 # apply environment
 if ! grep -q "~/env/loadEnv" ~/.bashrc; then
     echo "adding loadEnv to .bashrc"
