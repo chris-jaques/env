@@ -9,7 +9,7 @@ export ENV_DOCKER_IMAGE_PYTHON="python:3.7-alpine"
 
 # Dockerized Python
 dpy(){
-    dri -v $PWD:$PWD -w $PWD $ENV_DOCKER_IMAGE_PYTHON python ${@:1}
+    docker run --rm -it -v $PWD:$PWD -w $PWD $ENV_DOCKER_IMAGE_PYTHON python ${@:1}
 }
 
 # Run Unit Tests { ...testFiles? }

@@ -9,7 +9,7 @@ export ENV_DOCKER_IMAGE_ENV_SEARCH="siege4/env-search:latest"
 
 # Dockerized Alias Search { ...keyword }
 alias-search(){
-    dr -v $(e;pwd):/root/env $ENV_DOCKER_IMAGE_ENV_SEARCH "${@:1}"
+    docker run --rm -v $(e;pwd):/root/env $ENV_DOCKER_IMAGE_ENV_SEARCH "${@:1}"
 }
 
 # Alias Search { ...keyword }
