@@ -38,7 +38,8 @@ fi
 # create a local alias file
 if ! [ -f ~/env/local.al ]; then
     echo "Creating local.al"
-    echo "#!/bin/sh
+    cat <<EOL > ~/env/local.al
+#!/bin/sh
 #
 # Local Env
 # for directory aliases specific to this computer
@@ -48,10 +49,15 @@ if ! [ -f ~/env/local.al ]; then
 alias e='cd ~/env'
 
 # Root dir for dev projects
-alias dev='cd ~/dev'" > ~/env/local.al
-
+alias dev='cd ~/dev'
+EOL
     # ensure ~/dev exists
     mkdir -p ~/dev
+fi
+
+if ! [ -L ~/.vimrc ]; then
+    [ -f ~/.vimrc ] && rm ~/.vimrc
+    ln -s ~/env/.vimrc ~/.vimrc
 fi
 
 # apply environment

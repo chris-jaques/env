@@ -11,7 +11,7 @@ export ENV_DOCKER_IMAGE_TRANSLATE_SHELL='soimort/translate-shell:latest'
 trans(){
     lang=${1}
     text=${@:2}
-    dri $ENV_DOCKER_IMAGE_TRANSLATE_SHELL $lang "$text"
+    docker run --rm -it $ENV_DOCKER_IMAGE_TRANSLATE_SHELL $lang "$text"
 }
 
 # Translate Chinese to English

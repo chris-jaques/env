@@ -5,4 +5,4 @@
 #
 
 # Terraform { ...commands }
-alias tf='dri -v $(pwd):/workspace -w /workspace hashicorp/terraform:full'
+alias tf='docker run --rm -it -v $(pwd):/workspace -w /workspace hashicorp/terraform:full'

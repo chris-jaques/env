@@ -3,6 +3,9 @@
 # Bash Helpers
 #
 
+# Use vim as default editor
+export EDITOR=$(which vim)
+
 # Install Powerline Shell
 i_shell_env(){
   pinstall python-pip thefuck
