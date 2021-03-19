@@ -104,6 +104,12 @@ mapshow(){
   echo "$value" 
 }
 
+# Generic Map Storage - Copy value for key to clipboard without displaying { key } { configFile=.envmap }
+mapcp(){
+  echo -n $(mapshow ${@:1}) | cbcopy
+  echo $(highlight [$1 copied])
+}
+
 # Generic Map Storage - Set Value { key } { value } { configFile=.envmap }
 mapset(){
   key="${1:?Missing parameter: key}"
