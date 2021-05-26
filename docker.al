@@ -142,7 +142,7 @@ pull_latest_env_images(){
 		# Pull out the image part 
 		IMAGE=$(echo $IMAGE_VAR | sed "s/.*=//" )
 		
-		# Pull $NAME from the alias name ( minus the PULL_ALIAS_PREFIX )
+		# Pull $NAME from the alias name ( minus the IMAGE_VAR_PREFIX )
 		NAME=$(echo $IMAGE_VAR | sed "s/=.*//" | sed "s/$IMAGE_VAR_PREFIX//")
 
 		echo "Pulling latest image for $(highlight $NAME)..."
