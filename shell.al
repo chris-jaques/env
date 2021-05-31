@@ -44,9 +44,9 @@ cbpaste(){
 # Generic directory listing (in color)
 dir(){
   if ismac; then
-    ls -G ${@:1}
+    \ls -G ${@:1}
   else
-    ls --color ${@:1}
+    \ls --color ${@:1}
   fi
 }
 
