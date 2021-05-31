@@ -20,7 +20,7 @@ bootstrapcmd(){
 
 # Is Mac?
 ismac(){ 
-  [ "$(uname)" == "Darwin" ] ;
+  [ "$(uname)" = "Darwin" ] ;
 }
 
 # Copy to Clipboard { file? }
@@ -124,7 +124,7 @@ mapset(){
   # lookup existing value
   oldVal=$(grep "^$key:" $file)
   # write or replace key:value pair depending if it already exists
-  if [ "$oldVal" == "" ]; then
+  if [ "$oldVal" = "" ]; then
     echo "$key:$value" >> $file
   else sed -i "/^$key:/c$key:$value" $file;
   fi

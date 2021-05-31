@@ -19,7 +19,7 @@
 # Add a local cd alias { path } { alias } { ...label=path }
 cda(){
   
-  [ "$1" == "." ] && path=$(pwd) || path="$1"
+  [ "$1" = "." ] && path=$(pwd) || path="$1"
   [ "$3" ] && label="${@:3}" || label="$path"
 
   if ! grep -q "^alias $2\=" ~/env/local.al; then
