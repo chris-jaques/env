@@ -9,3 +9,6 @@ export ENV_DOCKER_IMAGE_TERRAFORM="hashicorp/terraform:light"
 
 # Terraform { ...commands }
 alias tf='docker run --rm -it -v $HOME:/root -v $(pwd):/workspace -w /workspace $ENV_DOCKER_IMAGE_TERRAFORM'
+
+# Format Terraform
+alias tff='tf fmt -recursive;'
