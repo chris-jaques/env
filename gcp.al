@@ -21,6 +21,21 @@ gg(){
     gcloud ${@:1}
 }
 
+# Dockerized gsutil cli
+gcs(){
+  docker run --rm -it \
+    -v $(pwd):/w \
+    -v ${HOME}/.config:/root/.config \
+    -w /w \
+    -e GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT} \
+    -e GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS} \
+    -e GOOGLE_APPLICATION_CREDENTIALS_DKC=${GOOGLE_APPLICATION_CREDENTIALS_DKC} \
+    -e GOOGLE_APPLICATION_CREDENTIALS_DK=${GOOGLE_APPLICATION_CREDENTIALS_DK} \
+    -e GOOGLE_PROJECT=${GOOGLE_PROJECT} \
+    ${ENV_DOCKER_IMAGE_GCLOUD} \
+    gsutil ${@:1}
+}
+
 # Get the current gcloud project
 ggproject(){ 
     gg config get-value project
