@@ -26,7 +26,7 @@ if [ -z $ENV_SKIP_GIT_PULL ]; then
 fi
 
 # Load ssh keys
-if [ -z $ENV_SKIP_SSH_ADD ]; then
+if [ -z $ENV_SKIP_SSH_ADD ] && [ `command -v ssh-agent` ]; then
     eval "$(ssh-agent -s)" >&/dev/null
     for key in $(grep -l "PRIVATE KEY" ~/.ssh/*); do
         ssh-add $key >&/dev/null;
