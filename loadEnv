@@ -24,3 +24,11 @@ fi
 if [ -z $ENV_SKIP_GIT_PULL ]; then
     git -C ~/env pull origin master &> /dev/null
 fi
+
+# Load ssh keys
+if [ -z $ENV_SKIP_SSH_ADD ]; then
+    eval "$(ssh-agent -s)" >&/dev/null
+    for key in $(grep -l "PRIVATE KEY" ~/.ssh/*); do
+        ssh-add $key >&/dev/null;
+    done
+fi
