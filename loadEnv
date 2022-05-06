@@ -28,7 +28,7 @@ fi
 # Load ssh keys
 if [ -z $ENV_SKIP_SSH_ADD ] && [ `command -v ssh-agent` ]; then
     eval "$(ssh-agent -s)" >&/dev/null
-    for key in $(grep -l "PRIVATE KEY" ~/.ssh/*); do
-        ssh-add $key >&/dev/null;
+    for private_key in $(grep -l "PRIVATE KEY" ~/.ssh/*); do
+        ssh-add $private_key >&/dev/null;
     done
 fi

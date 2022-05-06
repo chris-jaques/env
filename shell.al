@@ -95,14 +95,14 @@ mapget(){
 
 # Generic Map Storage - Output value for key { key } { configFile=.envmap }
 mapshow(){
-  key="${1:?Missing parameter: key}"
+  map_key="${1:?Missing parameter: key}"
 
   [ -z "$2" ] && file=".envmap" || file="$2"
   file="$HOME/$file"
   # find in map file
-  entry=$(grep "^$key:" $file)
+  entry=$(grep "^$map_key:" $file)
   # parse value
-  value=${entry/"$key:"/""}
+  value=${entry/"$map_key:"/""}
 
   echo "$value" 
 }
@@ -115,18 +115,18 @@ mapcp(){
 
 # Generic Map Storage - Set Value { key } { value } { configFile=.envmap }
 mapset(){
-  key="${1:?Missing parameter: key}"
+  map_key="${1:?Missing parameter: key}"
   value="${2:?Missing parameter: value}"
 
   [ -z "$3" ] && file=".envmap" || file="$3"
   file="$HOME/$file"
   [ ! -f "$file" ] && touch "$file"
   # lookup existing value
-  oldVal=$(grep "^$key:" $file)
+  oldVal=$(grep "^$map_key:" $file)
   # write or replace key:value pair depending if it already exists
   if [ "$oldVal" = "" ]; then
-    echo "$key:$value" >> $file
-  else sed -i "/^$key:/c$key:$value" $file;
+    echo "$map_key:$value" >> $file
+  else sed -i "/^$map_key:/c$map_key:$value" $file;
   fi
 }
 
@@ -140,12 +140,12 @@ maplist(){
 
 # Delete a Value from the Map Storage { key } { configFile=.envmap }
 mapdel(){
-  key="${1:?Missing parameter: key}"
+  map_key="${1:?Missing parameter: key}"
   
   [ -z "$2" ] && file=".envmap" || file="$2"
   file="$HOME/$file"
 
-  sed -i "/^$key\:/d" $file
+  sed -i "/^$map_key\:/d" $file
 }
 
 # Reset Env
@@ -178,9 +178,9 @@ echocopy(){
     value="${1:?Missing parameter: value}"
   else
     value="$2"
-    key="$1"
+    map_key="$1"
 
-    echo $(highlight "[ $key ]")
+    echo $(highlight "[ $map_key ]")
   fi
 
   echo -n $value | cbcopy

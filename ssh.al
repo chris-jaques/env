@@ -21,11 +21,14 @@ alias shl="ls ~/.ssh | grep .pub | sed 's/.pub//g'"
 # Get Public ssh key { label }
 shget() {
 	label=${1:?Missing parameter: label}
-
-	[[ -z "$label" ]] && key=~/.ssh/id_rsa.pub || key=~/.ssh/$label.pub
-    if [ -f "$key" ]; then
-	    value=$(cat $key)
-	    echocopy "$key" "$value"
+	[[ -z "$label" ]] && key_name="${HOME}/.ssh/id_rsa.pub" || key_name="${HOME}/.ssh/$label.pub"
+    if [ -f "$key_name" ]; then
+	    value=$(cat $key_name)
+	    echocopy "$key_name+++
+		
+		
+		
+		-*" "$value"
     else
         echo "No public key Found for $label."
     fi
