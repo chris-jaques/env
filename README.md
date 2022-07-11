@@ -100,7 +100,9 @@ This tells you that the first argument, "name", is required.
     - practicatl example:
     ```sh
         # Echo { ...outputText }
-        alias e="echo"
+        e(){
+            echo "${@:1}"
+        }
     ```
     - usage:
      ```sh
