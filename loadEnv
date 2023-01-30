@@ -32,3 +32,6 @@ if [ -z $ENV_SKIP_SSH_ADD ] && [ `command -v ssh-agent` ]; then
         ssh-add $private_key >&/dev/null;
     done
 fi
+
+# Shell vi mode
+set -o vi
