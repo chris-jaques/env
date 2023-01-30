@@ -193,3 +193,6 @@ highlight(){
   text="${@:1}"
   echo -en "\x1b[93m$text\x1b[0m"
 }
+
+# Check boolean statements with $STMPT && chk
+alias chk="echo TRUE || echo FALSE"
