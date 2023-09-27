@@ -60,9 +60,20 @@ if ! [ -L ~/.vimrc ]; then
     ln -s ~/env/.vimrc ~/.vimrc
 fi
 
+case $SHELL in
+    *bash)
+        shell_config=~/.bashrc
+    ;;
+    *zsh)
+        shell_config=~/.zshenv
+    ;;
+    default)
+        shell_config=~/.profile
+esac
+
 # apply environment
-if ! grep -q "~/env/loadEnv" ~/.bashrc; then
-    echo "adding loadEnv to .bashrc"
+if ! grep -q "~/env/loadEnv" $shell_config; then
+    echo "adding loadEnv to $shell_config"
     echo "# Source the env
-. ~/env/loadEnv" >> ~/.bashrc
+. ~/env/loadEnv" >> $shell_config
 fi
