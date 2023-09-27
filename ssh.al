@@ -4,13 +4,13 @@
 #
 
 
-# generate ssh keys { label } { email }
+# generate ssh keys { label } { email } { algorithm=ed25519 }
 shgen(){
-	
 	label=${1:?Missing parameter: label}
 	email=${2:?Missing parameter: email}
+	algorithm=${3:-ed25519}
 
-	ssh-keygen -t rsa -N "" -f ~/.ssh/$label -C $email
+	ssh-keygen -t $algorithm -N "" -f ~/.ssh/$label -C $email
 	eval "$(ssh-agent -s)"
 	ssh-add ~/.ssh/$label
 }
