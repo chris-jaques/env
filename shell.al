@@ -150,7 +150,7 @@ mapdel(){
 
 # Reset Env
 envr(){
-  source "$(e;pwd)/loadEnv"
+  source "${ENV_ABSOLUTE_PATH}/loadEnv"
 }
 
 # Run Bash installer function with sudo { installerName }
@@ -168,7 +168,7 @@ alias rr="r fc -s"
 # Get the Raw code from an alias { aliasName }
 rawalias(){
   aliasName="${1:?Missing parameter: aliasName}"
-  raw=$(grep -P "alias $aliasName=" $(e;pwd)/*.al | sed 's/.*=//g' | sed "s/[\'\"]//g")
+  raw=$(grep -P "alias $aliasName=" ${ENV_ABSOLUTE_PATH}/*.al | sed 's/.*=//g' | sed "s/[\'\"]//g")
   echo $raw;
 }
 

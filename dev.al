@@ -16,7 +16,7 @@ i_vscode(){
 # Edit the Env { file=local }
 eenv(){ 
     [ -z "$1" ] && file="local.al" || file="$1.al"
-    code ~/env "$(e;pwd)/$file"
+    code ${ENV_ABSOLUTE_PATH} "${ENV_ABSOLUTE_PATH}/$file"
 }
 
 # Open vscode and exit the terminal { dir=. }

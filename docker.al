@@ -88,10 +88,10 @@ dssh(){
 
 	# Copy the command to activate the env inside the container
 	# Now you can just <paste> + enter and it's activated
-	echo '. ~/env/loadEnv' | cbcopy
+	echo '. ${ENV_ABSOLUTE_PATH}/loadEnv' | cbcopy
 
 	dri \
-	-v $(e;pwd):/root/env \
+	-v ${ENV_ABSOLUTE_PATH}:/root/env \
 	${@:3} \
 	"$image" \
 	$cmd
