@@ -4,7 +4,7 @@
 #
 
 # set env var to the absolutepath of this script
-ENV_ABSOLUTE_PATH=$(dirname "${BASH_SOURCE[0]}")
+ENV_ABSOLUTE_PATH=$(dirname "${BASH_SOURCE[0]:-$0}")
 
 for al in $(find "${ENV_ABSOLUTE_PATH}" -name '*.al'); do . $al; done
 
